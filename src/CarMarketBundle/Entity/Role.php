@@ -2,6 +2,7 @@
 
 namespace CarMarketBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -27,6 +28,18 @@ class Role
      * @ORM\Column(name="name", type="string", length=20, unique=true)
      */
     private $name;
+
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\ManyToMany(targetEntity="CarMarketBundle\Entity\User", mappedBy="roles")
+     */
+    private $users;
+
+    public function __construct()
+    {
+        $this->users = new ArrayCollection();
+    }
 
 
     /**
@@ -61,6 +74,16 @@ class Role
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * Get role
+     *
+     * @return string
+     */
+    public function getRole()
+    {
+        return $this->getName();
     }
 }
 

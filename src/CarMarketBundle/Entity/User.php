@@ -2,6 +2,7 @@
 
 namespace CarMarketBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -55,6 +56,23 @@ class User
      * @ORM\OneToMany(targetEntity="CarMarketBundle\Entity\Car", mappedBy="author")
      */
     private $cars;
+
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\ManyToMany(targetEntity="CarMarketBundle\Entity\Role")
+     * @ORM\JoinTable(name="users_roles",
+     *          joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")},
+     *          inverseJoinColumns={@ORM\JoinColumn(name="role_id", referencedColumnName="id")}
+     *          )
+     */
+    private $roles;
+
+    public function __construct()
+    {
+        $this->cars = new ArrayCollection();
+        $this->roles = new ArrayCollection();
+    }
 
     /**
      * Get id
@@ -180,6 +198,44 @@ class User
     public function getCars()
     {
         return $this->car;
+    }
+
+    /**
+     * @param Role $role
+     *
+     * @return User
+     */
+    public function addRole(Role $role)
+    {
+        $this->roles[] = $role;
+
+        return $this;
+    }
+
+    /**
+     * Returns the roles granted to the user.
+     *
+     *     public function getRoles()
+     *     {
+     *         return ['ROLE_USER'];
+     *     }
+     *
+     * Alternatively, the roles might be stored on a ``roles`` property,
+     * and populated in any number of different ways when the user object
+     * is created.
+     *
+     * @return (Role|string)[] The user roles
+     */
+    public function getRoles()
+    {
+        $stringRoles = [];
+
+        /** @var Role $role */
+        foreach ($this->roles as $role) {
+           $stringRoles[] = $role->getRole();
+        }
+
+        return $stringRoles;
     }
 }
 
