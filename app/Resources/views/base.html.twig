@@ -1,14 +1,267 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
-        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
-            <?= phpinfo() ?>
-    </body>
+<html lang="en-US">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="CarMarket shop project">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}Car Market{% endblock %}</title>
+    {% block stylesheets %}
+        <link rel="stylesheet" type="text/css" href="{{ asset('frontend/styles/bootstrap4/bootstrap.min.css') }}">
+        <link href="{{ asset('frontend/plugins/fontawesome-free-5.0.1/css/fontawesome-all.css') }}" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" type="text/css" href="{{ asset('frontend/plugins/OwlCarousel2-2.2.1/owl.carousel.css') }} ">
+        <link rel="stylesheet" type="text/css" href="{{ asset('frontend/plugins/OwlCarousel2-2.2.1/owl.theme.default.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('frontend/plugins/OwlCarousel2-2.2.1/animate.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('frontend/plugins/slick-1.8.0/slick.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('frontend/styles/main_styles.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('frontend/styles/responsive.css') }}">
+
+        <!-- chart -->
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.css">
+    {% endblock %}
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
+        <script src="{{ asset('frontend/js/jquery-3.3.1.min.js')}}"></script>
+    <script type="text/javascript">
+        setTimeout(function() {
+            $('.alert').fadeOut();
+        }, 2000);
+    </script>
+</head>
+
+<body id="{% block body_id %}{% endblock %}">
+
+{% block header %}
+    <div class="super_container">
+    
+    <!-- Header -->
+    
+    <header class="header">
+
+        <!-- Top Bar -->
+
+        <div class="top_bar">
+            <div class="container">
+                <div class="row">
+                    <div class="col d-flex flex-row">
+                        <div class="top_bar_contact_item"><div class="top_bar_icon"><img src="{{ asset('frontend/images/phone.png')}}" alt=""></div>+38 068 005 3570</div>
+                        <div class="top_bar_contact_item"><div class="top_bar_icon"><img src="{{ asset('frontend/images/mail.png')}}" alt=""></div><a href="mailto:fastsales@gmail.com">fastsales@gmail.com</a></div>
+                        <div class="top_bar_content ml-auto">
+                        </div>
+                    </div>
+                </div>
+            </div>      
+        </div>
+
+        <!-- Header Main -->
+
+        <!-- Main Navigation -->
+
+    <nav class="main_nav">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    
+                    <div class="main_nav_content d-flex flex-row">
+                    
+                        <!-- Main Nav Menu -->
+
+                        <div class="main_nav_menu ml-auto">
+                            <ul class="standard_dropdown main_nav_dropdown">
+                                <li><a href="#">Home<i class="fas fa-chevron-down"></i></a></li>
+                                <li><a href="blog.html">Register<i class="fas fa-chevron-down"></i></a></li>
+                                <li><a href="contact.html">Login<i class="fas fa-chevron-down"></i></a></li>
+                            </ul>
+                        </div>
+
+                        <!-- Menu Trigger -->
+
+                        <div class="menu_trigger_container ml-auto">
+                            <div class="menu_trigger d-flex flex-row align-items-center justify-content-end">
+                                <div class="menu_burger">
+                                    <div class="menu_trigger_text">menu</div>
+                                    <div class="cat_burger menu_burger_inner"><span></span><span></span><span></span></div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Menu -->
+
+     <div class="page_menu">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    
+                    <div class="page_menu_content">
+                        <ul class="page_menu_nav">
+
+                            <li class="page_menu_item">
+                                <a href="#">Home<i class="fa fa-angle-down"></i></a>
+                            </li>
+                            <li class="page_menu_item"><a href="blog.html">Register<i class="fa fa-angle-down"></i></a></li>
+                            <li class="page_menu_item"><a href="contact.html">Login<i class="fa fa-angle-down"></i></a></li>
+                        </ul>
+                        
+                        <div class="menu_contact">
+                            <div class="menu_contact_item"><div class="menu_contact_icon"><img src="{{ asset('frontend/images/phone_white.png')}}" alt=""></div>+38 068 005 3570</div>
+                            <div class="menu_contact_item"><div class="menu_contact_icon"><img src="{{ asset('frontend/images/mail_white.png')}}" alt=""></div><a href="mailto:fastsales@gmail.com">fastsales@gmail.com</a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</header>
+
+<!-- Banner -->
+
+<div class="banner">
+    <div class="banner_background" style="background-image:url({{ asset('frontend/images/banner_background.jpg')}})"></div>
+    <div class="container fill_height">
+        <div class="row fill_height">
+            <div class="banner_product_image"><img src="{{ asset('frontend/images/banner_product.png')}}" alt=""></div>
+            <div class="col-lg-5 offset-lg-3 fill_height">
+                <div class="banner_content">
+                    <h1 class="banner_text">Car Market place</h1>
+                    <div class="banner_product_name">Transfer, buy or sell a vehicle</div>
+                    <div class="button banner_button"><a href="#">Shop Now</a></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <!-- Copyright -->
+
+    <div class="copyright">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    
+                    <div class="copyright_container d-flex flex-sm-row flex-column align-items-center justify-content-start">
+                        <div class="copyright_content">Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | Martin Marchev</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+<div class="container body-container">
+    {% block body %}
+        <div class="row">
+            <div id="main" class="col-sm-9">
+                {% block main %}{% endblock %}
+            </div>
+        </div>
+    {% endblock %}
+</div>
+
+{% block footer %}
+    <!-- Footer -->
+
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+
+                {# <div class="col-lg-3 footer_col">
+                    <div class="footer_column footer_contact">
+                        <div class="logo_container">
+                            <div class="logo"><a href="#">OneTech</a></div>
+                        </div>
+                        <div class="footer_title">Got Question? Call Us 24/7</div>
+                        <div class="footer_phone">+38 068 005 3570</div>
+                        <div class="footer_contact_text">
+                            <p>17 Princess Road, London</p>
+                            <p>Grester London NW18JR, UK</p>
+                        </div>
+                        <div class="footer_social">
+                            <ul>
+                                <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                                <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                                <li><a href="#"><i class="fab fa-youtube"></i></a></li>
+                                <li><a href="#"><i class="fab fa-google"></i></a></li>
+                                <li><a href="#"><i class="fab fa-vimeo-v"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-2 offset-lg-2">
+                    <div class="footer_column">
+                        <div class="footer_title">Find it Fast</div>
+                        <ul class="footer_list">
+                            <li><a href="#">Computers & Laptops</a></li>
+                            <li><a href="#">Cameras & Photos</a></li>
+                            <li><a href="#">Hardware</a></li>
+                            <li><a href="#">Smartphones & Tablets</a></li>
+                            <li><a href="#">TV & Audio</a></li>
+                        </ul>
+                        <div class="footer_subtitle">Gadgets</div>
+                        <ul class="footer_list">
+                            <li><a href="#">Car Electronics</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-lg-2">
+                    <div class="footer_column">
+                        <ul class="footer_list footer_list_2">
+                            <li><a href="#">Video Games & Consoles</a></li>
+                            <li><a href="#">Accessories</a></li>
+                            <li><a href="#">Cameras & Photos</a></li>
+                            <li><a href="#">Hardware</a></li>
+                            <li><a href="#">Computers & Laptops</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-lg-2">
+                    <div class="footer_column">
+                        <div class="footer_title">Customer Care</div>
+                        <ul class="footer_list">
+                            <li><a href="#">My Account</a></li>
+                            <li><a href="#">Order Tracking</a></li>
+                            <li><a href="#">Wish List</a></li>
+                            <li><a href="#">Customer Services</a></li>
+                            <li><a href="#">Returns / Exchange</a></li>
+                            <li><a href="#">FAQs</a></li>
+                            <li><a href="#">Product Support</a></li>
+                        </ul>
+                    </div>
+                </div> #}
+
+            </div>
+        </div>
+    </footer>
+{% endblock %}
+
+{% block javascripts %}
+
+    <script src="{{ asset('frontend/styles/bootstrap4/popper.js')}}"></script>
+    <script src="{{ asset('frontend/styles/bootstrap4/bootstrap.min.js')}}"></script>
+    <script src="{{ asset('frontend/plugins/greensock/TweenMax.min.js')}}"></script>
+    <script src="{{ asset('frontend/plugins/greensock/TimelineMax.min.js')}}"></script>
+    <script src="{{ asset('frontend/plugins/scrollmagic/ScrollMagic.min.js')}}"></script>
+    <script src="{{ asset('frontend/plugins/greensock/animation.gsap.min.js')}}"></script>
+    <script src="{{ asset('frontend/plugins/greensock/ScrollToPlugin.min.js')}}"></script>
+    <script src="{{ asset('frontend/plugins/OwlCarousel2-2.2.1/owl.carousel.js')}}"></script>
+    <script src="{{ asset('frontend/plugins/slick-1.8.0/slick.js')}}"></script>
+    <script src="{{ asset('frontend/plugins/easing/easing.js')}}"></script>
+    <script src="{{ asset('frontend/js/custom.js')}}"></script>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+
+    <script src="{{ asset('https://unpkg.com/sweetalert/dist/sweetalert.min.js')}}"></script>
+{% endblock %}
+
+</body>
 </html>
+

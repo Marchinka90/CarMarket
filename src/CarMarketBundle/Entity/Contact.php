@@ -163,5 +163,29 @@ class Contact
     {
         return $this->address;
     }
+
+    /**
+     * Set user
+     *
+     * @param int $user
+     *
+     * @return User
+     */
+    public function setUser($user)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return int
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
 }
 
