@@ -41,7 +41,6 @@ class Role
         $this->users = new ArrayCollection();
     }
 
-
     /**
      * Get id
      *

@@ -49,6 +49,14 @@ class Contact
      */
     private $address;
 
+    /**
+     * @var User
+     *
+     * @ORM\OneToOne(targetEntity="CarMarketBundle\Entity\User")
+     *
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     */
+    private $user;
 
     /**
      * Get id
