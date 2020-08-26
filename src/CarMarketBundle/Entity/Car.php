@@ -98,6 +98,21 @@ class Car
      */
     private $status;
 
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="authorId", type="integer")
+     */
+    private $authorId;
+
+    /**
+     * @var User
+     *
+     * @ORM\ManyToOne(targetEntity="CarMarketBundle\Entity\User", inversedBy="cars")
+     *
+     * @ORM\JoinColumn(name="authorId", referencedColumnName="id")
+     */
+    private $author;
 
     /**
      * Get id
@@ -371,6 +386,25 @@ class Car
     public function getStatus()
     {
         return $this->status;
+    }
+
+    /**
+     * @param User $author
+     * @return Car
+     */
+    public function setAuthor(User $author = null)
+    {
+        $this->author = $author;
+
+        return $this;
+    }
+
+    /**
+     * @return User
+     */
+    public function getAuthor()
+    {   
+        return $this->author;
     }
 }
 

@@ -49,6 +49,12 @@ class User
      */
     private $status;
 
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="CarMarketBundle\Entity\Car", mappedBy="author")
+     */
+    private $cars;
 
     /**
      * Get id
@@ -154,6 +160,26 @@ class User
     public function getStatus()
     {
         return $this->status;
+    }
+
+    /**
+     * @param ArrayCollection $car
+     *
+     * @return User
+     */
+    public function setCar(Car $car)
+    {
+        $this->cars[] = $car;
+
+        return $this;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getCars()
+    {
+        return $this->car;
     }
 }
 
