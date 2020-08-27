@@ -54,18 +54,13 @@ class CarController extends Controller
      */
     public function view($id)
     {
-        /*$article = $this->articleService->getOne($id);
+        $car = $this->getDoctrine()->getRepository(Car::class)->findBy(['id' => $id]);
 
-        if ($article == null) {
-            return $this->redirectToRoute('blog_index');
+        if ($car == null) {
+            return $this->redirectToRoute('homepage');
         }
 
-        $article->setViewCount($article->getViewCount() + 1);
-        $em = $this->getDoctrine()->getManager();
-        $em->persist($article);
-        $em->flush();
-
-        return $this->render('articles/view.html.twig', ['article' => $article]);*/
+        return $this->render('cars/view.html.twig', ['car' => $car]);
     }
 
     /**
