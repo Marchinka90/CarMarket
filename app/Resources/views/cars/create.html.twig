@@ -17,56 +17,56 @@
                 <div class="form-group">
                     <label class="col-sm-4 control-label" for="car_make">Make</label>
                     <div class="col-sm-4 ">
-                        <input type="text" class="form-control" id="car_make" placeholder="Make" name="car[make]">
+                        <input type="text" class="form-control" id="car_make" placeholder="Make" name="car[make]" value="{{ car.make|default(null) }}">
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-sm-4 control-label" for="car_model">Model</label>
                     <div class="col-sm-4 ">
-                        <input type="text" class="form-control" id="car_model" placeholder="Model" name="car[model]">
+                        <input type="text" class="form-control" id="car_model" placeholder="Model" name="car[model]" value="{{ car.model|default(null) }}">
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-sm-4 control-label" for="car_year">Year</label>
                     <div class="col-sm-4 ">
-                        <input type="text" class="form-control" id="car_year" placeholder="Year" name="car[year]">
+                        <input type="text" class="form-control" id="car_year" placeholder="Year" name="car[year]" value="{{ car.year|default(null) }}">
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-sm-4 control-label" for="car_power">Power</label>
                     <div class="col-sm-4 ">
-                        <input type="text" class="form-control" id="car_power" placeholder="Power" name="car[power]">
+                        <input type="text" class="form-control" id="car_power" placeholder="Power" name="car[power]" value="{{ car.power|default(null) }}">
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-sm-4 control-label" for="car_travelledDistance">Travelled Distance</label>
                     <div class="col-sm-4 ">
-                        <input type="text" class="form-control" id="car_travelledDistance" placeholder="Travelled Distance" name="car[travelledDistance]">
+                        <input type="text" class="form-control" id="car_travelledDistance" placeholder="Travelled Distance" name="car[travelledDistance]" value="{{ car.travelledDistance|default(null) }}">
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-sm-4 control-label" for="car_color">Color</label>
                     <div class="col-sm-4 ">
-                        <input type="text" class="form-control" id="car_color" placeholder="Color" name="car[color]">
+                        <input type="text" class="form-control" id="car_color" placeholder="Color" name="car[color]" value="{{ car.color|default(null) }}">
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-sm-4 control-label" for="car_city">City</label>
                     <div class="col-sm-4 ">
-                        <input type="text" class="form-control" id="car_city" placeholder="City" name="car[city]">
+                        <input type="text" class="form-control" id="car_city" placeholder="City" name="car[city]" value="{{ car.city|default(null) }}">
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-sm-4 control-label" for="car_note">Note</label>
                     <div class="col-sm-6">
-                        <textarea class="form-control" rows="6" id="car_note"name="car[note]"></textarea>
+                        <textarea class="form-control" rows="6" id="car_note"name="car[note]" value="{{ car.note|default(null) }}"></textarea>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-4 control-label" for="car_price">Price</label>
+                    <label class="col-sm-4 control-label" for="car_price">Price (EUR)</label>
                     <div class="col-sm-4 ">
-                        <input type="text" class="form-control" id="car_price" placeholder="Price" name="car[price]">
+                        <input type="text" class="form-control" id="car_price" placeholder="Price" name="car[price]" value="{{ car.price|default(null) }}">
                     </div>
                 </div>
 

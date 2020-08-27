@@ -42,7 +42,7 @@ class CarController extends Controller
             foreach ($errors as $error => $value) {
                 $this->addFlash("errors", $value->getMessage()); 
             }
-            return $this->render('users/register.html.twig', ['user' => $user, 'form' => $this->createForm(UserType::class)->createView()]);
+            return $this->render('cars/create.html.twig', ['car' => $car, 'form' => $this->createForm(CarType::class)->createView()]);
         }
 
 

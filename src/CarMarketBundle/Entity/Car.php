@@ -196,6 +196,9 @@ class Car
     private $author;
 
     /**
+     * @Assert\NotNull(
+     *      message="Price cannot be empty"
+     * )
      * @var int
      *
      * @ORM\Column(name="price", type="integer")
