@@ -1,20 +1,21 @@
 {% extends 'layouts/base.html.twig' %}
 
 {% block body %}
+    <br><br><br><br>
     <h2 class="text-center">Register</h2>
     <br>
-    	{%  for msg in app.session.flashBag.get('success')  %}
-            <div class="alert alert-success">
-                {{ msg }}
-            </div>
-        {%  endfor  %}
+	{%  for msg in app.session.flashBag.get('success')  %}
+        <div class="alert alert-success">
+            {{ msg }}
+        </div>
+    {%  endfor  %}
 
-        {%  for msg in app.session.flashBag.get('errors')  %}
-            <div class="alert alert-danger">
-                {{ msg }}
-            </div>
-        {%  endfor  %}
-	<div class="well offset-sm-4 mt-3">
+    {%  for msg in app.session.flashBag.get('errors')  %}
+        <div class="alert alert-danger">
+            {{ msg }}
+        </div>
+    {%  endfor  %}
+	<div class="well offset-sm-5 mt-3">
         <form class="form-horizontal" action="{{ path('user_register') }}" method="post">
             <fieldset>
                 <div class="form-group">
@@ -51,5 +52,6 @@
             </fieldset>
         </form>
     </div>
+    <br><br><br><br>
     
 {% endblock %}
