@@ -26,7 +26,7 @@ class User implements UserInterface
 
     /**
      * @Assert\NotNull(
-     *      message="Your username cannot be empty"
+     *      message="Username cannot be empty"
      * )
      * @Assert\Length(
      *      min = 4,
@@ -47,7 +47,9 @@ class User implements UserInterface
     private $username;
 
     /**
-     * @Assert\NotNull()
+     * @Assert\NotNull(
+     *      message="Email cannot be empty"
+     * )
      * @Assert\Email(
      *     message = "The email '{{ value }}' is not a valid email.",
      *     checkMX = false
@@ -60,7 +62,9 @@ class User implements UserInterface
     private $email;
 
     /**
-     * @Assert\NotNull()
+     * @Assert\NotNull(
+     *      message="Password cannot be empty"
+     * )
      * @Assert\Length(
      *      min = 3,
      *      minMessage = "Password must be at least 3 symbol"
@@ -78,7 +82,6 @@ class User implements UserInterface
     private $password;
 
     /**
-     * @Assert\NotNull()
      * @var string
      *
      * @ORM\Column(name="status", type="string", length=255)
