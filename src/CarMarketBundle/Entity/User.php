@@ -5,6 +5,7 @@ namespace CarMarketBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * User
@@ -24,6 +25,7 @@ class User implements UserInterface
     private $id;
 
     /**
+    * @Assert\NotNull()
      * @var string
      *
      * @ORM\Column(name="username", type="string", length=255)
@@ -31,6 +33,12 @@ class User implements UserInterface
     private $username;
 
     /**
+     * @Assert\NotNull()
+     * @Assert\Email(
+     *     message = "The email is not a valid.",
+     *     checkMX = true
+     * )
+     *
      * @var string
      *
      * @ORM\Column(name="email", type="string", length=50, unique=true)
@@ -38,6 +46,7 @@ class User implements UserInterface
     private $email;
 
     /**
+    * @Assert\NotNull()
      * @var string
      *
      * @ORM\Column(name="password", type="string", length=255)
@@ -45,6 +54,7 @@ class User implements UserInterface
     private $password;
 
     /**
+     * @Assert\NotNull()
      * @var string
      *
      * @ORM\Column(name="status", type="string", length=255)
@@ -250,7 +260,7 @@ class User implements UserInterface
     {
         // TODO: Implement getSalt() method.
     }
-    
+
     /**
      * Removes sensitive data from the user.
      *
@@ -260,6 +270,14 @@ class User implements UserInterface
     public function eraseCredentials()
     {
         // TODO: Implement eraseCredentials() method.
+    }
+
+    /**
+     * @return bool
+     */
+    public function isAdmin()
+    {
+        return in_array("ROLE_ADMIN", $this->getRoles());
     }
 }
 

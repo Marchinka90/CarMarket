@@ -46,26 +46,18 @@ class UserController extends Controller
             return $this->returnRegisterView($user);
         }
 
-        $passwordHash = $this->get('security.password_encoder')
-                ->encodePassword($user, $user->getPassword());
+        $passwordHash = $this->get('security.password_encoder')->encodePassword($user, $user->getPassword());
         $user->setPassword($passwordHash);
 
+        /* First User always is admin */
         $isAdmin = $this->getDoctrine()->getRepository(User::class)->findAll();
 
-        if (!$isAdmin) {
-            $role = $this
-                ->getDoctrine()
-                ->getRepository(Role::class)
-                ->findOneBy(['name' => 'ROLE_ADMIN']);
-        } else {
-             $role = $this
-                ->getDoctrine()
-                ->getRepository(Role::class)
-                ->findOneBy(['name' => 'ROLE_ADMIN']);
-        }
+        if (!$isAdmin[0]->isAdmin()) {
+            $role = $this->getDoctrine()->getRepository(Role::class)->findOneBy(['name' => 'ROLE_ADMIN']);
 
-        var_dump($role);
-        exit;
+        } else {
+             $role = $this->getDoctrine()->getRepository(Role::class)->findOneBy(['name' => 'ROLE_USER']);
+        }
         
         $user->addRole($role);
         $user->setStatus(1);
