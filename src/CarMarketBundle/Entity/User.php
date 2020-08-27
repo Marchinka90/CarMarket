@@ -62,12 +62,9 @@ class User implements UserInterface
     private $email;
 
     /**
-     * @Assert\NotNull(
-     *      message="Password cannot be empty"
-     * )
      * @Assert\Length(
-     *      min = 3,
-     *      minMessage = "Password must be at least 3 symbol"
+     *      min = 4,
+     *      minMessage = "Password must be at least 4 symbol"
      * )
      *
      * @Assert\Regex(

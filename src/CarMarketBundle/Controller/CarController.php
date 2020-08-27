@@ -36,6 +36,16 @@ class CarController extends Controller
         $form = $this->createForm(CarType::class, $car);
         $form->handleRequest($request);
         
+        $validator = $this->get('validator');
+        $errors = $validator->validate($car);
+        if ($errors) {
+            foreach ($errors as $error => $value) {
+                $this->addFlash("errors", $value->getMessage()); 
+            }
+            return $this->render('users/register.html.twig', ['user' => $user, 'form' => $this->createForm(UserType::class)->createView()]);
+        }
+
+
         $this->uploadFile($form, $car);
         $car->setAuthor($this->getUser());
         $em = $this->getDoctrine()->getManager();
@@ -94,5 +104,7 @@ class CarController extends Controller
 
         return $this->render('cars/my_cars.html.twig', ['cars' => $cars]);
     }
+
+
 
 }

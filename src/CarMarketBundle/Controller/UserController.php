@@ -35,7 +35,7 @@ class UserController extends Controller
 
         $validator = $this->get('validator');
         $errors = $validator->validate($user);
-        if ($errors) {
+        if (count($errors) > 0) {
             foreach ($errors as $error => $value) {
                 $this->addFlash("errors", $value->getMessage()); 
             }
@@ -47,6 +47,11 @@ class UserController extends Controller
         if ($email !== null) {
             $email = $email->getEmail();
             $this->addFlash("errors", "Email $email already taken");
+            return $this->returnRegisterView($user);
+        }
+
+        if ($form['password']['first']->getData() == null) {
+            $this->addFlash("errors", "Password cannot be empty");
             return $this->returnRegisterView($user);
         }
 
@@ -94,7 +99,7 @@ class UserController extends Controller
      */
     private function returnRegisterView(User $user): Response
     {
-        return $this->render('users/register.html.twig', ['user' => $user, 'form' => $this->createForm(UserType::class)->createView()],);
+        return $this->render('users/register.html.twig', ['user' => $user, 'form' => $this->createForm(UserType::class)->createView()]);
 
     }
 }
