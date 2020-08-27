@@ -72,6 +72,15 @@ class UserController extends Controller
     }
 
     /**
+     * @Route("/logout", name="user_logout")
+     * @throws \Exeption
+     */
+    public function logout()
+    {
+        throw new \Exeption('Logout failed!');
+    }
+
+    /**
      * @param User $user
      * @return Response
      */

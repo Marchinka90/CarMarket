@@ -10,7 +10,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class HomeController extends Controller
 {
     /**
-     * @Route("/", name="homepage")
+     * @Route("/", name="homepage", methods={"GET"})
      */
     public function indexAction(Request $request)
     {
