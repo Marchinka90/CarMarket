@@ -15,7 +15,7 @@
     {%  endfor  %}
     
     <header>
-        <h2>Make: {{ car.make }} - Price: {{ car.price }} </h2>
+        <h2>Make: {{ car.make }} - Price: {{ car.price }} EURO </h2>
     </header>
     <br>
     <p>Pubblished: {{ car.dateAdded|date("F jS \\a\\t g:ia") }}</p>
@@ -32,9 +32,11 @@
     <p>City: {{ car.city }}</p>
     <p>Note: {{ car.note }}</p>
 
-    <div class="">
-        <button type="submit" class="btn btn-dark">Edit</button>
-        <button type="submit" class="btn btn-danger">Delete</button>
+    <div>
+        {% if app.getUser() and (app.getUser().isAuthor(car) or app.getUser().isAdmin()) %}
+            <a class="btn btn-dark btn-xs" href="">Edit</a>
+            <a class="btn btn-danger btn-xs" href="">Delete</a>
+        {% endif %}
     </div>
     
     <br><br><br><br>

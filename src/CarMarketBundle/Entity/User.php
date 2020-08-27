@@ -279,5 +279,15 @@ class User implements UserInterface
     {
         return in_array("ROLE_ADMIN", $this->getRoles());
     }
+
+    /**
+     * @param Car $car
+     *
+     * @return bool
+     */
+    public function isAuthor(Car $car)
+    {
+        return $car->getAuthor()->getId() === $this->getId();
+    }
 }
 
