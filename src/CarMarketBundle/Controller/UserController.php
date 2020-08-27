@@ -92,7 +92,7 @@ class UserController extends Controller
      * @param User $user
      * @return Response
      */
-    private function returnRegisterView(User $user, $errors = null): Response
+    private function returnRegisterView(User $user): Response
     {
         return $this->render('users/register.html.twig', ['user' => $user, 'form' => $this->createForm(UserType::class)->createView()],);
 
