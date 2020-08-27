@@ -67,7 +67,7 @@
 
                         <div class="main_nav_menu ml-auto">
                             <ul class="standard_dropdown main_nav_dropdown">
-                                <li><a href="#">Home<i class="fas fa-chevron-down"></i></a></li>
+                                <li><a href="{{ path('homepage') }}">Home<i class="fas fa-chevron-down"></i></a></li>
                                 <li><a href="blog.html">Register<i class="fas fa-chevron-down"></i></a></li>
                                 <li><a href="contact.html">Login<i class="fas fa-chevron-down"></i></a></li>
                             </ul>
@@ -101,7 +101,7 @@
                         <ul class="page_menu_nav">
 
                             <li class="page_menu_item">
-                                <a href="#">Home<i class="fa fa-angle-down"></i></a>
+                                <a href="{{ path('homepage') }}">Home<i class="fa fa-angle-down"></i></a>
                             </li>
                             <li class="page_menu_item"><a href="blog.html">Register<i class="fa fa-angle-down"></i></a></li>
                             <li class="page_menu_item"><a href="contact.html">Login<i class="fa fa-angle-down"></i></a></li>
@@ -126,9 +126,11 @@
     <div class="container fill_height">
         <div class="row fill_height">
             <div class="banner_product_image"><img src="{{ asset('frontend/images/banner_product.png')}}" alt=""></div>
-            <div class="col-lg-5 offset-lg-3 fill_height">
+            <div class="col-lg-6 offset-lg-1 fill_height">
                 <div class="banner_content">
                     <h1 class="banner_text">Car Market place</h1>
+                    <br>
+                    <br>
                     <div class="banner_product_name">Transfer, buy or sell a vehicle</div>
                     <div class="button banner_button"><a href="#">Shop Now</a></div>
                 </div>
@@ -137,20 +139,6 @@
     </div>
 </div>
 
-    <!-- Copyright -->
-
-    <div class="copyright">
-        <div class="container">
-            <div class="row">
-                <div class="col">
-                    
-                    <div class="copyright_container d-flex flex-sm-row flex-column align-items-center justify-content-start">
-                        <div class="copyright_content">Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | Martin Marchev</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 </div>
 {% endblock %}
 
@@ -166,11 +154,18 @@
 
 {% block footer %}
     <!-- Footer -->
+    <footer class="copyright">
+        <div class="container ">
+            <div class="row " >
 
-    <footer class="footer">
-        <div class="container">
-            <div class="row">
+                <!-- Copyright -->
 
+                <div class="col">
+                    <div class="copyright_container d-flex flex-sm-row flex-column align-items-center justify-content-start">
+                        <div class="copyright_content">Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | Martin Marchev</div>
+                    </div>
+                </div>
+                      
                 {# <div class="col-lg-3 footer_col">
                     <div class="footer_column footer_contact">
                         <div class="logo_container">
