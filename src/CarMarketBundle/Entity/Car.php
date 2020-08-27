@@ -23,6 +23,14 @@ class Car
     private $id;
 
     /**
+     * @Assert\NotNull(
+     *      message="Make cannot be empty"
+     * )
+     * @Assert\Length(
+     *      min = 4,
+     *      minMessage = "Make must be at least 4 symbol",
+     * )
+     *
      * @var string
      *
      * @ORM\Column(name="make", type="string", length=255)
@@ -30,6 +38,13 @@ class Car
     private $make;
 
     /**
+     * @Assert\NotNull(
+     *      message="Model cannot be empty"
+     * )
+     * @Assert\Length(
+     *      min = 4,
+     *      minMessage = "Model must be at least 4 symbol",
+     * )
      * @var string
      *
      * @ORM\Column(name="model", type="string", length=255)
@@ -37,6 +52,19 @@ class Car
     private $model;
 
     /**
+     * @Assert\NotNull(
+     *      message="Year cannot be empty"
+     * )
+     * @Assert\Length(
+     *      min = 4,
+     *      minMessage = "Year must be 4 symbol"
+     * )
+     *
+     * @Assert\Regex(
+     *     pattern="/^[0-9]+$/",
+     *     match=true,
+     *     message="Year can contain only digits"
+     * )
      * @var int
      *
      * @ORM\Column(name="year", type="integer")
@@ -44,6 +72,13 @@ class Car
     private $year;
 
     /**
+     * @Assert\NotNull(
+     *      message="Power cannot be empty"
+     * )
+     * @Assert\Length(
+     *      min = 3,
+     *      minMessage = "Power must be at least 3 symbol"
+     * )
      * @var string
      *
      * @ORM\Column(name="power", type="string", length=255)
@@ -51,6 +86,19 @@ class Car
     private $power;
 
     /**
+     * @Assert\NotNull(
+     *      message="Travelled Distance cannot be empty"
+     * )
+     * @Assert\Length(
+     *      min = 2,
+     *      minMessage = "Year must be at least 2 symbol"
+     * )
+     *
+     * @Assert\Regex(
+     *     pattern="/^[0-9]+$/",
+     *     match=true,
+     *     message="Travelled Distance can contain only digits"
+     * )
      * @var int
      *
      * @ORM\Column(name="travelledDistance", type="integer")
@@ -58,6 +106,19 @@ class Car
     private $travelledDistance;
 
     /**
+     * @Assert\NotNull(
+     *      message="Color cannot be empty"
+     * )
+     * @Assert\Length(
+     *      min = 2,
+     *      minMessage = "Color must be at least 2 symbol"
+     * )
+     *
+     * @Assert\Regex(
+     *     pattern="/^[A-Za-z]+$/",
+     *     match=true,
+     *     message="Color cannot contain digit"
+     * )
      * @var string
      *
      * @ORM\Column(name="color", type="string", length=255)
@@ -65,6 +126,19 @@ class Car
     private $color;
 
     /**
+     * @Assert\NotNull(
+     *      message="City cannot be empty"
+     * )
+     * @Assert\Length(
+     *      min = 2,
+     *      minMessage = "City must be at least 2 symbol"
+     * )
+     *
+     * @Assert\Regex(
+     *     pattern="/^[A-Za-z]+$/",
+     *     match=true,
+     *     message="City cannot contain digit"
+     * )
      * @var string
      *
      * @ORM\Column(name="city", type="string", length=255)
@@ -72,6 +146,9 @@ class Car
     private $city;
 
     /**
+     * @Assert\NotNull(
+     *      message="Image cannot be empty"
+     * )
      * @var string
      *
      * @ORM\Column(name="image", type="string", length=255)
@@ -79,6 +156,9 @@ class Car
     private $image;
 
     /**
+     * @Assert\NotNull(
+     *      message="Note cannot be empty"
+     * )
      * @var string
      *
      * @ORM\Column(name="note", type="text")

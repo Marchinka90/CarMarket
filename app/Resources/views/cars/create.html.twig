@@ -4,11 +4,6 @@
     <br><br><br><br>
     <h2 class="text-center">New Car</h2>
     <br>
-    {%  for msg in app.session.flashBag.get('success')  %}
-        <div class="alert alert-success">
-            {{ msg }}
-        </div>
-    {%  endfor  %}
 
     {%  for msg in app.session.flashBag.get('errors')  %}
         <div class="alert alert-danger">
@@ -44,9 +39,9 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-sm-4 control-label" for="car_travelledDistance">travelledDistance</label>
+                    <label class="col-sm-4 control-label" for="car_travelledDistance">Travelled Distance</label>
                     <div class="col-sm-4 ">
-                        <input type="text" class="form-control" id="car_travelledDistance" placeholder="travelledDistance" name="car[travelledDistance]">
+                        <input type="text" class="form-control" id="car_travelledDistance" placeholder="Travelled Distance" name="car[travelledDistance]">
                     </div>
                 </div>
                 <div class="form-group">
