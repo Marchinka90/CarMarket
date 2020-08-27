@@ -35,15 +35,15 @@ class CarController extends Controller
         $car = new Car();
         $form = $this->createForm(CarType::class, $car);
         $form->handleRequest($request);
-
+        
         $this->uploadFile($form, $car);
-
+        $car->setAuthor($this->getUser());
         $em = $this->getDoctrine()->getManager();
 		$em->persist($car);
 		$em->flush();
         
         $this->addFlash('info', 'Create car successfully');
-        return $this->redirectToRoute('homapage');  
+        return $this->redirectToRoute('homepage');  
     }
 
     /**
@@ -58,7 +58,7 @@ class CarController extends Controller
 
         if ($file) {
            $file->move(
-                $this->getParameter('articles_directory'),
+                $this->getParameter('car_directory'),
                 $fileName
            );
            $car->setImage($fileName);

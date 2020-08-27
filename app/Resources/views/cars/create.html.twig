@@ -17,7 +17,7 @@
     {%  endfor  %}
 
     <div class="offset-sm-4 mt-3">
-        <form name="authenticate" class="form-horizontal" action="{{ path('car_create') }}" method="post">
+        <form name="authenticate" class="form-horizontal" action="{{ path('car_create') }}" method="post" enctype="multipart/form-data">
             <fieldset>
                 <div class="form-group">
                     <label class="col-sm-4 control-label" for="car_make">Make</label>
@@ -34,7 +34,7 @@
                 <div class="form-group">
                     <label class="col-sm-4 control-label" for="car_year">Year</label>
                     <div class="col-sm-4 ">
-                        <input type="number" class="form-control" id="car_year" placeholder="Year" name="car[year]">
+                        <input type="text" class="form-control" id="car_year" placeholder="Year" name="car[year]">
                     </div>
                 </div>
                 <div class="form-group">
@@ -46,7 +46,7 @@
                 <div class="form-group">
                     <label class="col-sm-4 control-label" for="car_travelledDistance">travelledDistance</label>
                     <div class="col-sm-4 ">
-                        <input type="number" class="form-control" id="car_travelledDistance" placeholder="travelledDistance" name="car[travelledDistance]">
+                        <input type="text" class="form-control" id="car_travelledDistance" placeholder="travelledDistance" name="car[travelledDistance]">
                     </div>
                 </div>
                 <div class="form-group">
@@ -71,7 +71,7 @@
                 <div class="form-group">
                     <label class="col-sm-4 control-label" for="car_price">Price</label>
                     <div class="col-sm-4 ">
-                        <input type="number" class="form-control" id="car_price" placeholder="Price" name="car[price]">
+                        <input type="text" class="form-control" id="car_price" placeholder="Price" name="car[price]">
                     </div>
                 </div>
 
