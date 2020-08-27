@@ -1,0 +1,44 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block body %}
+    <br><br><br><br>
+    <h2 class="text-center">Create Car</h2>
+    <br>
+    {%  for msg in app.session.flashBag.get('success')  %}
+        <div class="alert alert-success">
+            {{ msg }}
+        </div>
+    {%  endfor  %}
+
+    {%  for msg in app.session.flashBag.get('errors')  %}
+        <div class="alert alert-danger">
+            {{ msg }}
+        </div>
+    {%  endfor  %}
+
+    <div class="well offset-sm-5 mt-3">
+        <form name="authenticate" class="form-horizontal" action="{{ path('user_login') }}" method="post">
+            <fieldset>
+                <div class="form-group">
+                    <label class="col-sm-4 control-label" for="user_email">Email</label>
+                    <div class="col-sm-4 ">
+                        <input type="email" class="form-control" id="user_email" placeholder="Email" name="_username">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-4 control-label" for="password">Password</label>
+                    <div class="col-sm-4">
+                        <input type="password" class="form-control" id="password" placeholder="Password" name="_password">
+                    </div>
+                </div>
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}"/>
+                <div class="form-group">
+                    <div class="col-sm-4 col-sm-offset-4">
+                        <button type="submit" class="btn btn-primary">Login</button>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+    <br><br><br><br>
+{% endblock %}

@@ -70,7 +70,7 @@
                                 <li><a href="{{ path('homepage') }}">Home<i class="fas fa-chevron-down"></i></a></li>
                                 {% if app.user %}
                                     <li><a href="">Profile<i class="fas fa-chevron-down"></i></a></li>
-                                    <li><a href="">Sell Car<i class="fas fa-chevron-down"></i></a></li>
+                                    <li><a href="{{ path('car_create') }}">Add Car<i class="fas fa-chevron-down"></i></a></li>
                                     <li><a href="{{ path('user_logout') }}">Logout<i class="fas fa-chevron-down"></i></a></li>
                                 {% else %}
                                     <li><a href="{{ path('user_register') }}">Register<i class="fas fa-chevron-down"></i></a></li>
@@ -105,12 +105,17 @@
                     
                     <div class="page_menu_content">
                         <ul class="page_menu_nav">
-
                             <li class="page_menu_item">
                                 <a href="{{ path('homepage') }}">Home<i class="fa fa-angle-down"></i></a>
                             </li>
-                            <li class="page_menu_item"><a href="{{ path('user_register') }}">Register<i class="fa fa-angle-down"></i></a></li>
-                            <li class="page_menu_item"><a href="{{ path('user_login') }}">Login<i class="fa fa-angle-down"></i></a></li>
+                            {% if app.user %}
+                                <li><a href="">Profile<i class="fas fa-chevron-down"></i></a></li>
+                                <li><a href="{{ path('car_create') }}">Add Car<i class="fas fa-chevron-down"></i></a></li>
+                                <li><a href="{{ path('user_logout') }}">Logout<i class="fas fa-chevron-down"></i></a></li>
+                            {% else %}
+                                <li><a href="{{ path('user_register') }}">Register<i class="fas fa-chevron-down"></i></a></li>
+                                <li><a href="{{ path('user_login') }}">Login<i class="fas fa-chevron-down"></i></a></li>
+                            {% endif %}
                         </ul>
                         
                         <div class="menu_contact">
