@@ -21,4 +21,24 @@ class CarController extends Controller
     {
         return $this->render('cars/create.html.twig', ['form' => $this->createForm(CarType::class)->createView()]);
     } 
+
+    /**
+     * @Route("/create", methods={"POST"})
+     * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function createProcess(Request $request)
+    {
+        /*$article = new Article();
+        $form = $this->createForm(ArticleType::class, $article);
+        $form->handleRequest($request);
+        $this->uploadFile($form, $article);
+        
+        $this->articleService->create($article);
+        
+        $this->addFlash('info', 'Create article successfully');
+        return $this->redirectToRoute('blog_index'); */ 
+    }
+
 }

@@ -2,7 +2,7 @@
 
 {% block body %}
     <br><br><br><br>
-    <h2 class="text-center">Create Car</h2>
+    <h2 class="text-center">Add Car</h2>
     <br>
     {%  for msg in app.session.flashBag.get('success')  %}
         <div class="alert alert-success">
@@ -16,25 +16,68 @@
         </div>
     {%  endfor  %}
 
-    <div class="well offset-sm-5 mt-3">
-        <form name="authenticate" class="form-horizontal" action="{{ path('user_login') }}" method="post">
+    <div class="offset-sm-4 mt-3">
+        <form name="authenticate" class="form-horizontal" action="{{ path('car_create') }}" method="post">
             <fieldset>
                 <div class="form-group">
-                    <label class="col-sm-4 control-label" for="user_email">Email</label>
+                    <label class="col-sm-4 control-label" for="car_make">Make</label>
                     <div class="col-sm-4 ">
-                        <input type="email" class="form-control" id="user_email" placeholder="Email" name="_username">
+                        <input type="text" class="form-control" id="car_make" placeholder="Make" name="car[make]">
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-sm-4 control-label" for="password">Password</label>
-                    <div class="col-sm-4">
-                        <input type="password" class="form-control" id="password" placeholder="Password" name="_password">
+                    <label class="col-sm-4 control-label" for="car_model">Model</label>
+                    <div class="col-sm-4 ">
+                        <input type="text" class="form-control" id="car_model" placeholder="Model" name="car[model]">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-4 control-label" for="car_year">Year</label>
+                    <div class="col-sm-4 ">
+                        <input type="number" class="form-control" id="car_year" placeholder="Year" name="car[year]">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-4 control-label" for="car_power">Power</label>
+                    <div class="col-sm-4 ">
+                        <input type="text" class="form-control" id="car_power" placeholder="Power" name="car[power]">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-4 control-label" for="car_travelledDistance">travelledDistance</label>
+                    <div class="col-sm-4 ">
+                        <input type="number" class="form-control" id="car_travelledDistance" placeholder="travelledDistance" name="car[travelledDistance]">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-4 control-label" for="car_color">Color</label>
+                    <div class="col-sm-4 ">
+                        <input type="text" class="form-control" id="car_color" placeholder="Color" name="car[color]">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-4 control-label" for="car_city">City</label>
+                    <div class="col-sm-4 ">
+                        <input type="text" class="form-control" id="car_city" placeholder="City" name="car[city]">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-4 control-label" for="car_note">Note</label>
+                    <div class="col-sm-6">
+                        <textarea class="form-control" rows="6" id="car_note"name="car[note]"></textarea>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-4 control-label" for="car_image">Upload Image</label>
+                    <div class="col-sm-4 ">
+                        <input type="file" accept=".png, .jpg" class="form-control" id="car_image" placeholder="Upload Image" name="car[image]">
                     </div>
                 </div>
                 <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}"/>
                 <div class="form-group">
                     <div class="col-sm-4 col-sm-offset-4">
-                        <button type="submit" class="btn btn-primary">Login</button>
+                        <button type="submit" class="btn btn-primary">Add Car</button>
                     </div>
                 </div>
             </fieldset>

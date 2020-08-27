@@ -115,6 +115,13 @@ class Car
     private $author;
 
     /**
+     * @var int
+     *
+     * @ORM\Column(name="price", type="integer")
+     */
+    private $price;
+
+    /**
      * Get id
      *
      * @return int
@@ -405,6 +412,25 @@ class Car
     public function getAuthor()
     {   
         return $this->author;
+    }
+
+    /**
+     * @param integer $price
+     * @return Car
+     */
+    public function setPrice($price)
+    {
+        $this->price = $price;
+
+        return $this;
+    }
+
+    /**
+     * @return integer
+     */
+    public function getPrice()
+    {   
+        return $this->price;
     }
 }
 
