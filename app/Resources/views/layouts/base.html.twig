@@ -70,7 +70,7 @@
                                 <li><a href="{{ path('homepage') }}">Home<i class="fas fa-chevron-down"></i></a></li>
                                 {% if app.user %}
                                     <li><a href="">Profile<i class="fas fa-chevron-down"></i></a></li>
-                                    <li><a href="{{ path('car_create') }}">Add Car<i class="fas fa-chevron-down"></i></a></li>
+                                    <li><a href="{{ path('my_cars') }}">May Cars<i class="fas fa-chevron-down"></i></a></li>
                                     <li><a href="{{ path('user_logout') }}">Logout<i class="fas fa-chevron-down"></i></a></li>
                                 {% else %}
                                     <li><a href="{{ path('user_register') }}">Register<i class="fas fa-chevron-down"></i></a></li>
@@ -110,7 +110,7 @@
                             </li>
                             {% if app.user %}
                                 <li><a href="">Profile<i class="fas fa-chevron-down"></i></a></li>
-                                <li><a href="{{ path('car_create') }}">Add Car<i class="fas fa-chevron-down"></i></a></li>
+                                <li><a href="{{ path('my_cars') }}">May Cars<i class="fas fa-chevron-down"></i></a></li>
                                 <li><a href="{{ path('user_logout') }}">Logout<i class="fas fa-chevron-down"></i></a></li>
                             {% else %}
                                 <li><a href="{{ path('user_register') }}">Register<i class="fas fa-chevron-down"></i></a></li>
