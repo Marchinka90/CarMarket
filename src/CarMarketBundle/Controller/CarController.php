@@ -80,7 +80,19 @@ class CarController extends Controller
            );
            $car->setImage($fileName);
         }
+    }
 
+    /**
+     * @Route("/cars/my_cars", name="my_cars")
+     *
+     * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function getAllCarsByUser()
+    {
+        $car = $this->getDoctrine()->getRepository(Car::class)->findBy(['authorId' => $this->getUser()];
+
+        return $this->render('cars/my_cars.html.twig', ['cars' => $cars]);
     }
 
 }
