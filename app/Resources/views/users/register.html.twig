@@ -15,31 +15,32 @@
             {{ msg }}
         </div>
     {%  endfor  %}
+
 	<div class="well offset-sm-5 mt-3">
         <form class="form-horizontal" action="{{ path('user_register') }}" method="post">
             <fieldset>
                 <div class="form-group">
                     <label class="col-sm-4 control-label" for="user_username">Username</label>
                     <div class="col-sm-4 ">
-                        <input type="text" class="form-control" id="user_username" placeholder="Username" name="user[username]" required value="{{ user.username|default(null) }}">
+                        <input type="text" class="form-control" id="user_username" placeholder="Username" name="user[username]"  value="{{ user.username|default(null) }}">
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-sm-4 control-label" for="user_email">Email</label>
                     <div class="col-sm-4 ">
-                        <input class="form-control" id="user_email" placeholder="Email" name="user[email]" required type="email" value="{{ user.email|default(null) }}">
+                        <input class="form-control" id="user_email" placeholder="Email" name="user[email]"  type="email" value="{{ user.email|default(null) }}">
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-sm-4 control-label" for="user_password_first">Password</label>
                     <div class="col-sm-4">
-                        <input type="password" class="form-control" id="user_password_first" placeholder="Password" name="user[password][first]" required>
+                        <input type="password" class="form-control" id="user_password_first" placeholder="Password" name="user[password][first]" >
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-sm-4 control-label" for="user_password_second">Confirm Password</label>
                     <div class="col-sm-4">
-                        <input type="password" class="form-control" id="user_password_second" placeholder="Password" name="user[password][second]" required>
+                        <input type="password" class="form-control" id="user_password_second" placeholder="Password" name="user[password][second]" >
                     </div>
                 </div>
                 <div class="form-group">

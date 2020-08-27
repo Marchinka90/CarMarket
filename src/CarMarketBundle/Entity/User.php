@@ -25,7 +25,21 @@ class User implements UserInterface
     private $id;
 
     /**
-    * @Assert\NotNull()
+     * @Assert\NotNull(
+     *      message="Your username cannot be empty"
+     * )
+     * @Assert\Length(
+     *      min = 4,
+     *      max = 20,
+     *      minMessage = "Username Min lenght is 4",
+     *      maxMessage = "Username Max lenght is 20"
+     * )
+     *
+     * @Assert\Regex(
+     *     pattern="/^[A-Za-z]+$/",
+     *     match=true,
+     *     message="Your username cannot contain digit"
+     * )
      * @var string
      *
      * @ORM\Column(name="username", type="string", length=255)
@@ -35,8 +49,8 @@ class User implements UserInterface
     /**
      * @Assert\NotNull()
      * @Assert\Email(
-     *     message = "The email is not a valid.",
-     *     checkMX = true
+     *     message = "The email '{{ value }}' is not a valid email.",
+     *     checkMX = false
      * )
      *
      * @var string
@@ -46,7 +60,17 @@ class User implements UserInterface
     private $email;
 
     /**
-    * @Assert\NotNull()
+     * @Assert\NotNull()
+     * @Assert\Length(
+     *      min = 3,
+     *      minMessage = "Password must be at least 3 symbol"
+     * )
+     *
+     * @Assert\Regex(
+     *     pattern="/^[a-z0-9]+$/",
+     *     match=true,
+     *     message="Your password can contain only lowercase letters and digits"
+     * )
      * @var string
      *
      * @ORM\Column(name="password", type="string", length=255)

@@ -33,6 +33,16 @@ class UserController extends Controller
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
 
+        $validator = $this->get('validator');
+        $errors = $validator->validate($user);
+        if ($errors) {
+            foreach ($errors as $error => $value) {
+                $this->addFlash("errors", $value->getMessage());
+                
+            }
+            return $this->returnRegisterView($user);
+        }
+
         $email = $this->getDoctrine()->getRepository(User::class)->findOneBy(['email' => $form['email']->getData()]);
 
         if ($email !== null) {
@@ -84,9 +94,9 @@ class UserController extends Controller
      * @param User $user
      * @return Response
      */
-    private function returnRegisterView(User $user): Response
+    private function returnRegisterView(User $user, $errors = null): Response
     {
-        return $this->render('users/register.html.twig', ['user' => $user, 'form' => $this->createForm(UserType::class)->createView()]);
+        return $this->render('users/register.html.twig', ['user' => $user, 'form' => $this->createForm(UserType::class)->createView()],);
 
     }
 }
