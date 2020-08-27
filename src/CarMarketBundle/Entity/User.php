@@ -38,7 +38,7 @@ class User implements UserInterface
      * @Assert\Regex(
      *     pattern="/^[A-Za-z]+$/",
      *     match=true,
-     *     message="Your username cannot contain digit"
+     *     message="Username cannot contain digit"
      * )
      * @var string
      *

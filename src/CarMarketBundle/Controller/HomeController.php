@@ -14,7 +14,13 @@ class HomeController extends Controller
      */
     public function indexAction(Request $request)
     {
-        $cars = $this->getDoctrine()->getRepository(Car::class)->findBy([], ['dateAdded' => 'DESC']);
+        // $cars = $this->getDoctrine()->getRepository(Car::class)->findBy([], ['dateAdded' => 'DESC']);
+
+        $repository = $this->getDoctrine()->getRepository(Car::class);
+        $query = $repository->createQueryBuilder('c')
+            ->orderBy('c.dateAdded', 'DESC')
+            ->getQuery();
+        $cars = $query->setMaxResults(4)->getResult();
 
         return $this->render('home/index.html.twig', [
             // 'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,

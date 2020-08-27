@@ -37,8 +37,7 @@ class UserController extends Controller
         $errors = $validator->validate($user);
         if ($errors) {
             foreach ($errors as $error => $value) {
-                $this->addFlash("errors", $value->getMessage());
-                
+                $this->addFlash("errors", $value->getMessage()); 
             }
             return $this->returnRegisterView($user);
         }
@@ -78,7 +77,6 @@ class UserController extends Controller
 
 		$this->addFlash("success", "User was created successfuly");
         return $this->redirectToRoute('user_register');
-        
     }
 
     /**
