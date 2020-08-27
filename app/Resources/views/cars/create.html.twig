@@ -2,7 +2,7 @@
 
 {% block body %}
     <br><br><br><br>
-    <h2 class="text-center">Add Car</h2>
+    <h2 class="text-center">New Car</h2>
     <br>
     {%  for msg in app.session.flashBag.get('success')  %}
         <div class="alert alert-success">
@@ -84,7 +84,7 @@
                 <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}"/>
                 <div class="form-group">
                     <div class="col-sm-4 col-sm-offset-4">
-                        <button type="submit" class="btn btn-primary">Add Car</button>
+                        <button type="submit" class="btn btn-primary">Submit</button>
                     </div>
                 </div>
             </fieldset>
