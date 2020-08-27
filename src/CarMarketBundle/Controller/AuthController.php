@@ -9,7 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class AuthController extends Controller
 {
     /**
-     * @Route("/login", name="user_login", methods={"GET"})
+     * @Route("/login", name="user_login")
      * @param $name
      * @return \Symfony\Component\HttpFoundation\Response
      */

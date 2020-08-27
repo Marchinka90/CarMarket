@@ -47,6 +47,28 @@ class CarController extends Controller
     }
 
     /**
+     * @Route("/car/{id}", name="car_view")
+     *
+     * @param $id
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function view($id)
+    {
+        /*$article = $this->articleService->getOne($id);
+
+        if ($article == null) {
+            return $this->redirectToRoute('blog_index');
+        }
+
+        $article->setViewCount($article->getViewCount() + 1);
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($article);
+        $em->flush();
+
+        return $this->render('articles/view.html.twig', ['article' => $article]);*/
+    }
+
+    /**
      * @param FormInterface $form
      * @param Car $car
      */
