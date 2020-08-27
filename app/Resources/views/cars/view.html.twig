@@ -1,0 +1,41 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block body %}
+    <br><br><br><br>
+    {%  for msg in app.session.flashBag.get('success')  %}
+        <div class="alert alert-success">
+            {{ msg }}
+        </div>
+    {%  endfor  %}
+
+    {%  for msg in app.session.flashBag.get('errors')  %}
+        <div class="alert alert-danger">
+            {{ msg }}
+        </div>
+    {%  endfor  %}
+    
+    <header>
+        <h2>Make: {{ car.make }} - Price: {{ car.price }} </h2>
+    </header>
+    <br>
+    <p>Pubblished: {{ car.dateAdded|date("F jS \\a\\t g:ia") }}</p>
+    <div>
+        <img src="{{ asset('uploads/images/cars/' ~ car.image ) }}" width="400px" height="200px">
+    </div>
+
+    <br>
+    <p>Model: {{ car.model }}</p>
+    <p>Year: {{ car.year }}</p>
+    <p>Power: {{ car.power }}</p>
+    <p>Travelled Distance: {{ car.travelledDistance }}</p>
+    <p>Color: {{ car.color }}</p>
+    <p>City: {{ car.city }}</p>
+    <p>Note: {{ car.note }}</p>
+
+    <div class="">
+        <button type="submit" class="btn btn-dark">Edit</button>
+        <button type="submit" class="btn btn-danger">Delete</button>
+    </div>
+    
+    <br><br><br><br>
+{% endblock %}

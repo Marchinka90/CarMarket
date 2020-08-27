@@ -54,7 +54,7 @@ class CarController extends Controller
      */
     public function view($id)
     {
-        $car = $this->getDoctrine()->getRepository(Car::class)->findBy(['id' => $id]);
+        $car = $this->getDoctrine()->getRepository(Car::class)->find($id);
 
         if ($car == null) {
             return $this->redirectToRoute('homepage');
