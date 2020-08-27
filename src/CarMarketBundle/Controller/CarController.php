@@ -90,7 +90,7 @@ class CarController extends Controller
      */
     public function getAllCarsByUser()
     {
-        $car = $this->getDoctrine()->getRepository(Car::class)->findBy(['authorId' => $this->getUser()];
+        $cars = $this->getDoctrine()->getRepository(Car::class)->findBy(['authorId' => $this->getUser()]);
 
         return $this->render('cars/my_cars.html.twig', ['cars' => $cars]);
     }

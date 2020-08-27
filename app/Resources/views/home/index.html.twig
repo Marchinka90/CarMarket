@@ -32,24 +32,22 @@
         <div class="col-lg-6">
             <article>
                 <header>
-                    <h2>{{ car.make }}</h2>
+                    <h3>{{ car.make }} - {{ car.price }} EURO</h3>
                 </header>
                 <a href="{{ path('car_view', {id:car.id}) }}">
                     <img src="{{ asset('uploads/images/cars/' ~ car.image ) }}" width="400px" height="200px">
                 </a>
 
-                <small class="author">
+                <p class="author">
                     Date Added: {{ car.dateAdded|date("F jS \\a\\t g:ia") }}
-                </small>
+                </p>
 
-                <small class="author">
+                <p class="author">
                     Author: {{ car.author.username }}
-                </small>
+                </p>
 
                 <footer>
-                    <div class="button banner_button">
-                        <a  href="{{ path('car_view', {id: car.id}) }}">Read more &raquo;</a>
-                    </div>
+                    <a class="btn btn-primary btn-xs" href="{{ path('car_view', {id: car.id}) }}">View</a>
                 </footer>
             </article>
         </div>

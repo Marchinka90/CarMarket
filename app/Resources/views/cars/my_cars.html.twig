@@ -1,0 +1,39 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block body %}
+
+{% if cars %}
+    <br><br><br><br>
+<h1 class="col-lg-12 text-center">My Cars</h1>
+<br><br>
+<div class="row">
+    
+{% for car in cars %}
+        <div class="col-lg-6">
+            <article>
+                <header>
+                    <h2>{{ car.make }}</h2>
+                </header>
+                <a href="{{ path('car_view', {id:car.id}) }}">
+                    <img src="{{ asset('uploads/images/cars/' ~ car.image ) }}" width="400px" height="200px">
+                </a>
+
+                <p class="author">
+                    Date Added: {{ car.dateAdded|date("F jS \\a\\t g:ia") }}
+                </p>
+
+                <p class="author">
+                    Author: {{ car.author.username }}
+                </p>
+                <footer>
+                    <a class="btn btn-primary btn-xs" href="{{ path('car_view', {id: car.id}) }}">View</a>
+                </footer>
+            </article>
+        </div>
+
+    {% endfor %}
+</div>
+
+{% endif %}
+    
+{% endblock %}
