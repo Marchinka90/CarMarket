@@ -68,7 +68,7 @@
                         <div class="main_nav_menu ml-auto">
                             <ul class="standard_dropdown main_nav_dropdown">
                                 <li><a href="{{ path('homepage') }}">Home<i class="fas fa-chevron-down"></i></a></li>
-                                <li><a href="blog.html">Register<i class="fas fa-chevron-down"></i></a></li>
+                                <li><a href="{{ path('user_register') }}">Register<i class="fas fa-chevron-down"></i></a></li>
                                 <li><a href="contact.html">Login<i class="fas fa-chevron-down"></i></a></li>
                             </ul>
                         </div>
@@ -103,7 +103,7 @@
                             <li class="page_menu_item">
                                 <a href="{{ path('homepage') }}">Home<i class="fa fa-angle-down"></i></a>
                             </li>
-                            <li class="page_menu_item"><a href="blog.html">Register<i class="fa fa-angle-down"></i></a></li>
+                            <li class="page_menu_item"><a href="{{ path('user_register') }}">Register<i class="fa fa-angle-down"></i></a></li>
                             <li class="page_menu_item"><a href="contact.html">Login<i class="fa fa-angle-down"></i></a></li>
                         </ul>
                         
@@ -119,25 +119,7 @@
 
 </header>
 
-<!-- Banner -->
 
-<div class="banner">
-    <div class="banner_background" style="background-image:url({{ asset('frontend/images/banner_background.jpg')}})"></div>
-    <div class="container fill_height">
-        <div class="row fill_height">
-            <div class="banner_product_image"><img src="{{ asset('frontend/images/banner_product.png')}}" alt=""></div>
-            <div class="col-lg-6 offset-lg-1 fill_height">
-                <div class="banner_content">
-                    <h1 class="banner_text">Car Market place</h1>
-                    <br>
-                    <br>
-                    <div class="banner_product_name">Transfer, buy or sell a vehicle</div>
-                    <div class="button banner_button"><a href="#">Shop Now</a></div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 
 </div>
 {% endblock %}
