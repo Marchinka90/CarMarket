@@ -24,7 +24,8 @@ class CarType extends AbstractType
             ->add('color', TextType::class)
             ->add('city', TextType::class)
             ->add('image', TextType::class)
-            ->add('note', TextType::class);
+            ->add('note', TextType::class)
+            ->add('price', IntegerType::class);
     }
 
     /**

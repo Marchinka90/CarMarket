@@ -121,6 +121,12 @@ class Car
      */
     private $price;
 
+    public function __construct()
+    {
+        $this->dateAdded = new \DateTime('now');
+        $this->status = 1;
+    }
+
     /**
      * Get id
      *

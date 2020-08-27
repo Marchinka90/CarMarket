@@ -2,9 +2,11 @@
 
 namespace CarMarketBundle\Controller;
 
+use CarMarketBundle\Entity\Car;
 use CarMarketBundle\Form\CarType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -30,15 +32,38 @@ class CarController extends Controller
      */
     public function createProcess(Request $request)
     {
-        /*$article = new Article();
-        $form = $this->createForm(ArticleType::class, $article);
+        $car = new Car();
+        $form = $this->createForm(CarType::class, $car);
         $form->handleRequest($request);
-        $this->uploadFile($form, $article);
+
+        $this->uploadFile($form, $car);
+
+        $em = $this->getDoctrine()->getManager();
+		$em->persist($car);
+		$em->flush();
         
-        $this->articleService->create($article);
-        
-        $this->addFlash('info', 'Create article successfully');
-        return $this->redirectToRoute('blog_index'); */ 
+        $this->addFlash('info', 'Create car successfully');
+        return $this->redirectToRoute('homapage');  
+    }
+
+    /**
+     * @param FormInterface $form
+     * @param Car $car
+     */
+    private function uploadFile(FormInterface $form, Car $car)
+    {
+        /** @var UploadFile $file */
+        $file = $form['image']->getData();
+        $fileName = md5(uniqid()) . '.' . $file->guessExtension();
+
+        if ($file) {
+           $file->move(
+                $this->getParameter('articles_directory'),
+                $fileName
+           );
+           $car->setImage($fileName);
+        }
+
     }
 
 }
