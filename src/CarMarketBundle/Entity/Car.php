@@ -27,8 +27,8 @@ class Car
      *      message="Make cannot be empty"
      * )
      * @Assert\Length(
-     *      min = 4,
-     *      minMessage = "Make must be at least 4 symbol",
+     *      min = 3,
+     *      minMessage = "Make must be at least 3 symbol",
      * )
      *
      * @var string
@@ -42,8 +42,8 @@ class Car
      *      message="Model cannot be empty"
      * )
      * @Assert\Length(
-     *      min = 4,
-     *      minMessage = "Model must be at least 4 symbol",
+     *      min = 3,
+     *      minMessage = "Model must be at least 3 symbol",
      * )
      * @var string
      *

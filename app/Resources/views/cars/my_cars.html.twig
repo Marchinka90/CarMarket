@@ -2,12 +2,26 @@
 
 {% block body %}
 
-{% if cars %}
-    <br><br><br><br>
+<br><br><br><br>
+{%  for msg in app.session.flashBag.get('success')  %}
+    <div class="alert alert-success">
+        {{ msg }}
+    </div>
+{%  endfor  %}
+
+{%  for msg in app.session.flashBag.get('errors')  %}
+    <div class="alert alert-danger">
+        {{ msg }}
+    </div>
+{%  endfor  %}
+
+<br><br><br><br>
 <h1 class="col-lg-12 text-center">My Cars</h1>
 <a class="btn btn-warning btn-xs float-right" href="{{ path('car_create') }}">New Car</a>
 <br><br>
-<div class="row">
+<div class="row">    
+
+{% if cars %}
     
 {% for car in cars %}
         <div class="col-lg-6">
@@ -33,8 +47,9 @@
         </div>
 
     {% endfor %}
-</div>
 
 {% endif %}
+
+</div>
     
 {% endblock %}

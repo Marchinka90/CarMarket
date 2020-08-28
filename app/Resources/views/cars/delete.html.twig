@@ -2,41 +2,25 @@
 
 {% block body %}
     <br><br><br><br>
-    {%  for msg in app.session.flashBag.get('success')  %}
-        <div class="alert alert-success">
-            {{ msg }}
-        </div>
-    {%  endfor  %}
-
-    {%  for msg in app.session.flashBag.get('errors')  %}
-        <div class="alert alert-danger">
-            {{ msg }}
-        </div>
-    {%  endfor  %}
     
     <div class="row">
         <h1 class="text-center col">Delete Car</h1>
-        <div class="container body-content offset-sm-2 mt-5">   
-            <form class="form-horizontal" action="{{ path('car_delete', {id: car.id}) }}" method="POST">
-                <fieldset>
-                    <h3>Make: {{ car.make }} - Price: {{ car.price }} (EUR) </h3>
-                    <div>
-                        <img src="{{ asset('uploads/images/cars/' ~ car.image ) }}" width="400px" height="200px">
-                    </div>
-                    <br>
-                    <p>Pubblished: {{ car.dateAdded|date("F jS \\a\\t g:ia") }}</p>
-                    
-                    {{ form_row(form._token) }}
-
-                    <div class="form-group">
-                        <div class="col-sm-4 offset-sm-2">
-                            <a class="btn btn-dark btn-xs" href="{{ path('car_view', {id: car.id}) }}">Cancel</a>
-                            <button type="submit" class="btn btn-danger" id="delete">Delete</button>
-                        </div>
-                    </div>
-                </fieldset>
-            </form>
+        <div class="container body-content offset-sm-2 mt-5">    
+            <h3>Make: {{ car.make }} - Price: {{ car.price }} (EUR) </h3>
+            <div>
+                <img src="{{ asset('uploads/images/cars/' ~ car.image ) }}" width="400px" height="200px">
+            </div>
+            <br>
+            <p>Pubblished: {{ car.dateAdded|date("F jS \\a\\t g:ia") }}</p>
             
+            {{ form_row(form._token) }}
+
+            <div class="form-group">
+                <div class="col-sm-4 offset-sm-2">
+                    <a class="btn btn-dark btn-xs" href="{{ path('car_view', {id: car.id}) }}">Cancel</a>
+                    <a class="btn btn-danger btn-xs" href="{{ path('car_delete_confirmed', {id: car.id}) }}" id="delete">Delete</a>
+                </div>
+            </div>
         </div>
     </div>
     <br><br><br><br>
@@ -45,6 +29,7 @@
          $(document).on("click", "#delete", function(e){
              e.preventDefault();
              var link = $(this).attr("href");
+             console.log(link);
                 swal({
                   title: "Are you Want to delete?",
                   text: "Once Delete, This will be Permanently Delete!",

@@ -38,7 +38,7 @@ class CarController extends Controller
         
         $validator = $this->get('validator');
         $errors = $validator->validate($car);
-        if ($errors) {
+        if (count($errors) > 0) {
             foreach ($errors as $error => $value) {
                 $this->addFlash("errors", $value->getMessage()); 
             }
@@ -52,8 +52,8 @@ class CarController extends Controller
 		$em->persist($car);
 		$em->flush();
         
-        $this->addFlash('info', 'Create car successfully');
-        return $this->redirectToRoute('homepage');  
+        $this->addFlash('success', 'Car created successfully');
+        return $this->redirectToRoute('my_cars');  
     }
 
     /**
@@ -94,6 +94,27 @@ class CarController extends Controller
         return $this->render('cars/delete.html.twig', ['form' => $this->createForm(CarType::class)->createView(),
             'car' => $car
         ]);
+    }
+
+    /**
+     * @Route("/car/{id}/delete_confirmed", name="car_delete_confirmed", methods={"GET"})
+     *
+     * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
+     * @param Request $request
+     * @param int $id
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function deleteProcess(Request $request, int $id)
+    {
+        $car = $this->getDoctrine()->getRepository(Car::class)->find($id);
+        $form = $this->createForm(CarType::class, $car);
+        $form->handleRequest($request);
+
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($car);
+        $em->flush();
+        $this->addFlash('success', 'Car deleted successfully');
+        return $this->redirectToRoute('my_cars');
     }
 
     /**
