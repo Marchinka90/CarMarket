@@ -44,9 +44,9 @@
                 <footer>
                     {% if app.getUser() %}
                         {% if contact == null %}
-                            <a class="btn btn-info btn-xs" href="{{ path('user_create_contact') }}">Create Contact</a>
+                            <a class="btn btn-info btn-xs" href="{{ path('create_contact') }}">Create Contact</a>
                         {% else %}
-                            <a class="btn btn-info btn-xs" href="{{ path('user_edit_contact') }}">Edit Contact</a>
+                            <a class="btn btn-info btn-xs" href="{{ path('edit_contact') }}">Edit Contact</a>
                         {% endif %}
                         <a class="btn btn-warning btn-xs" href="">Change Password</a>
                     {% endif %}
