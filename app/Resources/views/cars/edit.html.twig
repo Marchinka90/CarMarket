@@ -88,7 +88,8 @@
                 <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}"/>
                 <div class="form-group">
                     <div class="col-sm-4 col-sm-offset-4">
-                        <button type="submit" class="btn btn-primary">Edit</button>
+                        <a class="btn btn-dark btn-xs" href="{{ path('car_view', {id: car.id}) }}">Cancel</a>
+                        <button type="submit" class="btn btn-info">Edit</button>
                     </div>
                 </div>
             </fieldset>

@@ -57,7 +57,7 @@ class CarController extends Controller
     }
 
     /**
-     * @Route("/car/{id}", name="car_view")
+     * @Route("car/{id}", name="car_view")
      *
      * @param $id
      * @return \Symfony\Component\HttpFoundation\Response
@@ -74,7 +74,7 @@ class CarController extends Controller
     }
 
     /**
-     * @Route("/car/{id}/delete", name="car_delete", methods={"GET"})
+     * @Route("car/{id}/delete", name="car_delete", methods={"GET"})
      * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
      * @param int $id
      * @return \Symfony\Component\HttpFoundation\Response
@@ -97,7 +97,7 @@ class CarController extends Controller
     }
 
     /**
-     * @Route("/car/{id}/delete_confirmed", name="car_delete_confirmed", methods={"GET"})
+     * @Route("car/{id}/delete_confirmed", name="car_delete_confirmed", methods={"GET"})
      *
      * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
      * @param Request $request
@@ -138,6 +138,40 @@ class CarController extends Controller
         return $this->render('cars/edit.html.twig', ['form' => $this->createForm(CarType::class) ->createView(),
             'car' => $car
         ]);
+    }
+
+    /**
+     * @Route("car/{id}/edit", methods={"POST"})
+     *
+     * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
+     * @param Request $request
+     * @param int $id 
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function editProcess(Request $request, int $id)
+    {
+        $car = $this->getDoctrine()->getRepository(Car::class)->find($id);
+        $form = $this->createForm(CarType::class, $car);
+        $form->handleRequest($request);
+
+        $validator = $this->get('validator');
+        $errors = $validator->validate($car);
+
+        if (count($errors) > 0) {
+            foreach ($errors as $error => $value) {
+                $this->addFlash("errors", $value->getMessage()); 
+            }
+            return $this->render('cars/edit.html.twig', ['car' => $car, 'form' => $this->createForm(CarType::class)->createView()]);
+        }
+
+        $this->uploadFile($form, $car);
+        
+        $em = $this->getDoctrine()->getManager();
+        $em->merge($car);
+        $em->flush();
+
+        $this->addFlash('success', 'Car edited successfully');
+        return $this->redirectToRoute('my_cars');
     }
 
     /**
