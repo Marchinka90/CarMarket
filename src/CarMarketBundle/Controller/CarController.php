@@ -105,6 +105,18 @@ class CarController extends Controller
         return $this->render('cars/my_cars.html.twig', ['cars' => $cars]);
     }
 
+    /**
+     * @Route("/cars", name="all_cars", methods={"GET"})
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function getAllCars()
+    {
+        $cars = $this->getDoctrine()->getRepository(Car::class)->findBy([]);
+
+        return $this->render('cars/all_cars.html.twig', ['cars' => $cars]);
+    }
+
 
 
 }
