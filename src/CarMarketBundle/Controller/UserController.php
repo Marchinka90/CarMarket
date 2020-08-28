@@ -2,6 +2,7 @@
 
 namespace CarMarketBundle\Controller;
 
+use CarMarketBundle\Entity\Contact;
 use CarMarketBundle\Entity\Role;
 use CarMarketBundle\Entity\User;
 use CarMarketBundle\Form\UserType;
@@ -83,6 +84,19 @@ class UserController extends Controller
 		$this->addFlash("success", "User was created successfuly");
         return $this->redirectToRoute('user_register');
     }
+
+
+    /**
+     * @Route("profile", name="user_profile")
+     */
+    public function profile()
+    {
+        $contact = $this->getDoctrine()->getRepository(Contact::class)->findBy(['user' => $this->getUser()]);
+        
+        return $this->render('users/profile.html.twig', ['user' => $this->getUser(), 'contact' => $contact]);
+    }
+
+
 
     /**
      * @Route("/logout", name="user_logout")

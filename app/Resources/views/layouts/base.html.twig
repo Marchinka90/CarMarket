@@ -69,7 +69,7 @@
                             <ul class="standard_dropdown main_nav_dropdown">
                                 <li><a href="{{ path('homepage') }}">Home<i class="fas fa-chevron-down"></i></a></li>
                                 {% if app.user %}
-                                    <li><a href="">Profile<i class="fas fa-chevron-down"></i></a></li>
+                                    <li><a href="{{ path('user_profile') }}">Profile<i class="fas fa-chevron-down"></i></a></li>
                                     <li><a href="{{ path('my_cars') }}">My Cars<i class="fas fa-chevron-down"></i></a></li>
                                     <li><a href="{{ path('user_logout') }}">Logout<i class="fas fa-chevron-down"></i></a></li>
                                 {% else %}
@@ -109,7 +109,7 @@
                                 <a href="{{ path('homepage') }}">Home<i class="fa fa-angle-down"></i></a>
                             </li>
                             {% if app.user %}
-                                <li><a href="">Profile<i class="fas fa-chevron-down"></i></a></li>
+                                <li><a href="{{ path('user_profile') }}">Profile<i class="fas fa-chevron-down"></i></a></li>
                                 <li><a href="{{ path('my_cars') }}">My Cars<i class="fas fa-chevron-down"></i></a></li>
                                 <li><a href="{{ path('user_logout') }}">Logout<i class="fas fa-chevron-down"></i></a></li>
                             {% else %}

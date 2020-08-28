@@ -1,0 +1,53 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block body %}
+    <br><br><br><br>
+    <h2 class="text-center">Profile</h2>
+    <br>
+	{%  for msg in app.session.flashBag.get('success')  %}
+        <div class="alert alert-success">
+            {{ msg }}
+        </div>
+    {%  endfor  %}
+
+    {%  for msg in app.session.flashBag.get('errors')  %}
+        <div class="alert alert-danger">
+            {{ msg }}
+        </div>
+    {%  endfor  %}
+
+    <br><br>
+    <div class="row">
+            <div class="col-lg-6">
+                <article>
+                    <header>
+                        <h3>Welcome {{ contact.firstNmae|default(null) }} {{ contact.lastName|default(null) }}</h3>
+                    </header>
+                    <br>
+                    <p class="author">
+                        Username: {{ user.username }}
+                    </p>
+
+                    <p class="author">
+                        First Name: {{ contact.firstNmae|default(null) }}
+                    </p>
+
+                    <p class="author">
+                        Last Name: {{ contact.lastName|default(null) }}
+                    </p>
+                    <p class="author">
+                        Phone: {{ contact.phone|default(null) }}
+                    </p>
+                    <p class="author">
+                        Address: {{ contact.address|default(null) }}
+                    </p>
+                    <footer>
+                        
+                    </footer>
+                </article>
+            </div>
+        
+    </div>
+
+    
+{% endblock %}
