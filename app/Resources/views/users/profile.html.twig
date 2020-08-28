@@ -18,36 +18,38 @@
 
     <br><br>
     <div class="row">
-            <div class="col-lg-6">
-                <article>
-                    <header>
-                        <h3>Welcome {{ contact.firstNmae|default(null) }} {{ contact.lastName|default(null) }}</h3>
-                    </header>
-                    <br>
-                    <p class="author">
-                        Username: {{ user.username }}
-                    </p>
+        <div class="col-lg">
+            <article>
+                <header>
+                    <h3>Welcome {{ contact.firstNmae|default(user.username) }} {{ contact.lastName|default(null) }}</h3>
+                </header>
+                <br>
+                <p class="author">
+                    Username: {{ user.username }}
+                </p>
 
-                    <p class="author">
-                        First Name: {{ contact.firstNmae|default(null) }}
-                    </p>
+                <p class="author">
+                    First Name: {{ contact.firstNmae|default(null) }}
+                </p>
 
-                    <p class="author">
-                        Last Name: {{ contact.lastName|default(null) }}
-                    </p>
-                    <p class="author">
-                        Phone: {{ contact.phone|default(null) }}
-                    </p>
-                    <p class="author">
-                        Address: {{ contact.address|default(null) }}
-                    </p>
-                    <footer>
-                        
-                    </footer>
-                </article>
-            </div>
-        
+                <p class="author">
+                    Last Name: {{ contact.lastName|default(null) }}
+                </p>
+                <p class="author">
+                    Phone: {{ contact.phone|default(null) }}
+                </p>
+                <p class="author">
+                    Address: {{ contact.address|default(null) }}
+                </p>
+                <footer>
+                    {% if app.getUser() %}
+                        <a class="btn btn-info btn-xs" href="{{ path('user_edit_contact') }}">Edit Contact</a>
+                        <a class="btn btn-warning btn-xs" href="">Change Password</a>
+                    {% endif %}
+                </footer>
+            </article>
+        </div>
     </div>
-
+    <br><br>
     
 {% endblock %}

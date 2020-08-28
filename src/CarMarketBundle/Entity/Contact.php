@@ -3,6 +3,7 @@
 namespace CarMarketBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Contact
@@ -22,6 +23,20 @@ class Contact
     private $id;
 
     /**
+     * @Assert\NotNull(
+     *      message="First Name cannot be empty"
+     * )
+     * @Assert\Length(
+     *      min = 3,
+     *      
+     *      minMessage = "First Name must be at least 3 symbol",
+     * )
+     *
+     * @Assert\Regex(
+     *     pattern="/^[A-Za-z]+$/",
+     *     match=true,
+     *     message="Username cannot contain digit"
+     * )
      * @var string
      *
      * @ORM\Column(name="firstName", type="string", length=255)
@@ -29,6 +44,19 @@ class Contact
     private $firstName;
 
     /**
+     * @Assert\NotNull(
+     *      message="Last Name cannot be empty"
+     * )
+     * @Assert\Length(
+     *      min = 3,
+     *      minMessage = "Last Name must be at least 3 symbol",
+     * )
+     *
+     * @Assert\Regex(
+     *     pattern="/^[A-Za-z]+$/",
+     *     match=true,
+     *     message="Username cannot contain digit"
+     * )
      * @var string
      *
      * @ORM\Column(name="lastName", type="string", length=255)
@@ -36,6 +64,19 @@ class Contact
     private $lastName;
 
     /**
+     * @Assert\NotNull(
+     *      message="Phone cannot be empty"
+     * )
+     * @Assert\Length(
+     *      min = 6,
+     *      minMessage = "phone must be at least 6 symbol"
+     * )
+     *
+     * @Assert\Regex(
+     *     pattern="/^[0-9]+$/",
+     *     match=true,
+     *     message="Year can contain only digits"
+     * )
      * @var int
      *
      * @ORM\Column(name="phone", type="integer")
@@ -43,6 +84,9 @@ class Contact
     private $phone;
 
     /**
+     * @Assert\NotNull(
+     *      message="Address cannot be empty"
+     * )
      * @var string
      *
      * @ORM\Column(name="address", type="string", length=255)
