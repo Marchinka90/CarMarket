@@ -74,22 +74,29 @@ class CarController extends Controller
     }
 
     /**
-     * @param FormInterface $form
-     * @param Car $car
+     * @Route("/car/{id}", name="car_delete", methods={"GET"})
+     * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
+     * @param int $id
+     * @return \Symfony\Component\HttpFoundation\Response
      */
-    private function uploadFile(FormInterface $form, Car $car)
+    public function delete(int $id)
     {
-        /** @var UploadFile $file */
-        $file = $form['image']->getData();
-        $fileName = md5(uniqid()) . '.' . $file->guessExtension();
+        $car = $this->getDoctrine()->getRepository(Car::class)->findBy(['id' => $id]);
 
-        if ($file) {
-           $file->move(
-                $this->getParameter('car_directory'),
-                $fileName
-           );
-           $car->setImage($fileName);
+        var_dump($car);
+        exit;
+
+        if ($article == null) {
+            return $this->redirectToRoute('blog_index');
         }
+
+        if (!$this->isAuthorOrAdmin($article)) {
+            return $this->redirectToRoute('blog_index'); 
+        }
+
+        return $this->render('articles/delete.html.twig', ['form' => $this->createForm(ArticleType::class)->createView(),
+            'article' => $article
+        ]);
     }
 
     /**
@@ -115,6 +122,25 @@ class CarController extends Controller
         $cars = $this->getDoctrine()->getRepository(Car::class)->findBy([]);
 
         return $this->render('cars/all_cars.html.twig', ['cars' => $cars]);
+    }
+
+    /**
+     * @param FormInterface $form
+     * @param Car $car
+     */
+    private function uploadFile(FormInterface $form, Car $car)
+    {
+        /** @var UploadFile $file */
+        $file = $form['image']->getData();
+        $fileName = md5(uniqid()) . '.' . $file->guessExtension();
+
+        if ($file) {
+           $file->move(
+                $this->getParameter('car_directory'),
+                $fileName
+           );
+           $car->setImage($fileName);
+        }
     }
 
 
