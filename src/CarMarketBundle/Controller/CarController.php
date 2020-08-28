@@ -84,11 +84,11 @@ class CarController extends Controller
         $car = $this->getDoctrine()->getRepository(Car::class)->find($id);
 
         if ($car == null) {
-            return $this->redirectToRoute('car_view');
+            return $this->redirectToRoute('my_cars');
         }
 
         if (!$this->isAuthorOrAdmin($car)) {
-            return $this->redirectToRoute('car_view'); 
+            return $this->redirectToRoute('homepage'); 
         }
 
         return $this->render('cars/delete.html.twig', ['form' => $this->createForm(CarType::class)->createView(),
@@ -115,6 +115,29 @@ class CarController extends Controller
         $em->flush();
         $this->addFlash('success', 'Car deleted successfully');
         return $this->redirectToRoute('my_cars');
+    }
+
+    /**
+     * @Route("car/{id}/edit", name="car_edit", methods={"GET"})
+     * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
+     * @param int $id 
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function edit(int $id)
+    {
+        $car = $this->getDoctrine()->getRepository(Car::class)->find($id);
+
+        if ($car == null) {
+            return $this->redirectToRoute('my_cars');
+        }
+
+        if (!$this->isAuthorOrAdmin($car)) {
+            return $this->redirectToRoute('homepage'); 
+        }
+
+        return $this->render('cars/edit.html.twig', ['form' => $this->createForm(CarType::class) ->createView(),
+            'car' => $car
+        ]);
     }
 
     /**

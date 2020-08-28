@@ -34,7 +34,7 @@
 
     <div>
         {% if app.getUser() and (app.getUser().isAuthor(car) or app.getUser().isAdmin()) %}
-            <a class="btn btn-dark btn-xs" href="">Edit</a>
+            <a class="btn btn-dark btn-xs" href="{{ path('car_edit', {id: car.id}) }}">Edit</a>
             <a class="btn btn-danger btn-xs" href="{{ path('car_delete', {id: car.id}) }}">Delete</a>
         {% endif %}
     </div>
