@@ -88,8 +88,67 @@ class UserController extends Controller
     }
 
     /**
+     * @Route("change_password", name="change_password", methods={"GET"})
      * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
+     */
+    public function passwordChange()
+    {
+        return $this->render('users/password.html.twig', ['user' => $this->getUser(), 'form' => $this->createForm(UserType::class)->createView()]);
+    }
+
+    /**
+     * @Route("change_password", methods={"POST"})
+     * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function passwordChangeProcess(Request $request)
+    {
+        $user = $this->getUser();
+        $currentPassword = $request->request->get('user');
+        $currentPassword = $currentPassword['old_password'];
+
+        if ($currentPassword == null) {
+            $this->addFlash("errors", "Current Password cannot be empty");
+            return $this->render('users/password.html.twig', ['user' => $this->getUser(), 'form' => $this->createForm(UserType::class)->createView()]);
+        }
+
+        $valid = $this->get('security.password_encoder')->isPasswordValid($user, $currentPassword);
+        if (!$valid) {
+            $this->addFlash("errors", "Wrong Current Password");
+            return $this->render('users/password.html.twig', ['user' => $this->getUser(), 'form' => $this->createForm(UserType::class)->createView()]);
+        }
+
+        $form = $this->createForm(UserType::class, $user);
+        $form->remove('username');
+        $form->remove('email');
+        $form->remove('status');
+        $form->handleRequest($request);
+        
+        if ($form['password']['first']->getData() == null) {
+            $this->addFlash("errors", "New Password cannot be empty");
+            return $this->render('users/password.html.twig', ['user' => $this->getUser(), 'form' => $this->createForm(UserType::class)->createView()]);
+        }
+
+        if($form['password']['first']->getData() !== $form['password']['second']->getData()){
+            $this->addFlash("errors", "New Password mismatch");
+            return $this->render('users/password.html.twig', ['user' => $this->getUser(), 'form' => $this->createForm(UserType::class)->createView()]);
+        }
+
+        $passwordHash = $this->get('security.password_encoder')->encodePassword($user, $user->getPassword());
+        $user->setPassword($passwordHash);
+
+        $em = $this->getDoctrine()->getManager();
+        $em->merge($user);
+        $em->flush();
+
+        $this->addFlash("success", "Password changed successfuly");
+        return $this->redirectToRoute('user_profile');
+    }
+
+    /**
      * @Route("profile", name="user_profile")
+     * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
      */
     public function profile()
     {

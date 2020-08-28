@@ -90,4 +90,6 @@ class ContactController extends Controller
 		$this->addFlash("success", "Edit contact successfuly");
         return $this->redirectToRoute('user_profile');
     }
+
+    
 }
