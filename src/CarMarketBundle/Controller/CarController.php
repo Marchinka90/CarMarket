@@ -74,28 +74,25 @@ class CarController extends Controller
     }
 
     /**
-     * @Route("/car/{id}", name="car_delete", methods={"GET"})
+     * @Route("/car/{id}/delete", name="car_delete", methods={"GET"})
      * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
      * @param int $id
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function delete(int $id)
     {
-        $car = $this->getDoctrine()->getRepository(Car::class)->findBy(['id' => $id]);
+        $car = $this->getDoctrine()->getRepository(Car::class)->find($id);
 
-        var_dump($car);
-        exit;
-
-        if ($article == null) {
-            return $this->redirectToRoute('blog_index');
+        if ($car == null) {
+            return $this->redirectToRoute('car_view');
         }
 
-        if (!$this->isAuthorOrAdmin($article)) {
-            return $this->redirectToRoute('blog_index'); 
+        if (!$this->isAuthorOrAdmin($car)) {
+            return $this->redirectToRoute('car_view'); 
         }
 
-        return $this->render('articles/delete.html.twig', ['form' => $this->createForm(ArticleType::class)->createView(),
-            'article' => $article
+        return $this->render('cars/delete.html.twig', ['form' => $this->createForm(CarType::class)->createView(),
+            'car' => $car
         ]);
     }
 
@@ -141,6 +138,21 @@ class CarController extends Controller
            );
            $car->setImage($fileName);
         }
+    }
+
+    /**
+     * @param Car $car
+     * @return bool
+     */
+    private function isAuthorOrAdmin(Car $car)
+    {
+        /** @var User $currentUser */
+        $currentUser = $this->getUser();
+        if (!$currentUser->isAuthor($car) || !$currentUser->isAdmin()) {
+            return false;
+        }
+
+        return true;
     }
 
 
