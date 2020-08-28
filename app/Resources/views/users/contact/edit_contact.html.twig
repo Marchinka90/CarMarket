@@ -1,0 +1,55 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block body %}
+    <br><br><br><br>
+    <h2 class="text-center">Edit Contact</h2>
+    <br>
+
+    {%  for msg in app.session.flashBag.get('errors')  %}
+        <div class="alert alert-danger">
+            {{ msg }}
+        </div>
+    {%  endfor  %}
+
+    <br><br>
+    <div class="row mt-3">
+        <form class="form-horizontal col-lg-5 offset-lg-3" action="{{ path('user_create_contact') }}" method="post">
+            <fieldset>
+                <div class="form-group">
+                    <label class="col control-label" for="contact_firstName">First Name</label>
+                    <div class="col">
+                        <input type="text" class="form-control" id="contact_firstName" placeholder="First Name" name="contact[firstName]" required value="{{ contact.firstName|default(null) }}">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col control-label" for="contact_lastName">Last Name</label>
+                    <div class="col">
+                        <input type="text" class="form-control" id="contact_lastName" placeholder="Last Name" name="contact[lastName]" required value="{{ contact.lastName|default(null) }}">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col control-label" for="contact_phone">Phone</label>
+                    <div class="col">
+                        <input type="text" class="form-control" id="contact_phone" placeholder="Phone" name="contact[phone]" required value="{{ contact.phone|default(null) }}">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col control-label" for="contact_address">Address</label>
+                    <div class="col">
+                        <input type="text" class="form-control" id="contact_address" placeholder="Address" name="contact[address]" required value="{{ contact.address|default(null) }}">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-4 col-sm-offset-4">
+                        <button type="submit" class="btn btn-primary">Edit</button>
+                    </div>
+                </div>
+
+                {{  form_row(form._token) }}
+            </fieldset>
+        </form>
+    </div>
+    <br><br><br><br>
+    
+{% endblock %}

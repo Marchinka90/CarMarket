@@ -2,11 +2,12 @@
 
 namespace CarMarketBundle\Controller;
 
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use CarMarketBundle\Entity\Contact;
 use CarMarketBundle\Entity\Role;
 use CarMarketBundle\Entity\User;
+use CarMarketBundle\Form\ContactType;
 use CarMarketBundle\Form\UserType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -86,7 +87,6 @@ class UserController extends Controller
         return $this->redirectToRoute('user_register');
     }
 
-
     /**
      * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
      * @Route("profile", name="user_profile")
@@ -96,22 +96,6 @@ class UserController extends Controller
         $contact = $this->getDoctrine()->getRepository(Contact::class)->findBy(['user' => $this->getUser()]);
         return $this->render('users/profile.html.twig', ['user' => $this->getUser(), 'contact' => $contact]);
     }
-
-    /**
-     * @Route("/profile/edit_contact", name="user_edit_contact", methods={"GET"})
-     * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
-     * @return Response
-     */
-    public function edit()
-    {   
-        var_dump('tuk');
-        exit;
-        return $this->render('users/edit_contact.html.twig', [
-            'user' => $this->userService->currentUser(),
-            'form' => $this->createForm(UserType::class)->createView()]);
-    }
-
-
 
     /**
      * @Route("/logout", name="user_logout")

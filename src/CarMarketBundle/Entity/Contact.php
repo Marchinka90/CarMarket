@@ -28,7 +28,6 @@ class Contact
      * )
      * @Assert\Length(
      *      min = 3,
-     *      
      *      minMessage = "First Name must be at least 3 symbol",
      * )
      *
