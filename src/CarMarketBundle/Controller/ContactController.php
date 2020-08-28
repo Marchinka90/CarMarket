@@ -53,12 +53,41 @@ class ContactController extends Controller
     }
 
     /**
-     * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
      * @Route("contact/edit", name="edit_contact", methods={"GET"})
+     * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
      */
     public function edit()
     {
-        $contact = $this->getDoctrine()->getRepository(Contact::class)->findBy(['user' => $this->getUser()]);
-        return $this->render('users/contact/create.html.twig', ['contact' => $contact, 'form' => $this->createForm(ContactType::class)->createView()]);
+        $contact = $this->getDoctrine()->getRepository(Contact::class)->find($this->getUser()->getId());
+        return $this->render('users/contact/edit.html.twig', ['contact' => $contact, 'form' => $this->createForm(ContactType::class)->createView()]);
+    }
+
+    /**
+     * @Route("contact/edit", methods={"POST"})
+     * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function editProcess(Request $request)
+    {
+        $contact = $this->getDoctrine()->getRepository(Contact::class)->find($this->getUser()->getId());
+        $form = $this->createForm(ContactType::class, $contact);
+        $form->handleRequest($request);
+
+        $validator = $this->get('validator');
+        $errors = $validator->validate($contact);
+        if (count($errors) > 0) {
+            foreach ($errors as $error => $value) {
+                $this->addFlash("errors", $value->getMessage()); 
+            }
+            return $this->render('users/contact/edit.html.twig', ['contact' => $contact, 'form' => $this->createForm(ContactType::class)->createView()]);
+        }
+
+        $em = $this->getDoctrine()->getManager();
+		$em->merge($contact);
+		$em->flush();
+
+		$this->addFlash("success", "Edit contact successfuly");
+        return $this->redirectToRoute('user_profile');
     }
 }

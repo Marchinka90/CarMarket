@@ -147,7 +147,7 @@ h6::selection
 }
 .form-control
 {
-	color: #495057;
+	color: #495057 !important; 
 }
 section
 {
