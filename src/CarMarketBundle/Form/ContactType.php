@@ -31,13 +31,4 @@ class ContactType extends AbstractType
         ));
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getBlockPrefix()
-    {
-        return 'carmarketbundle_contact';
-    }
-
-
 }

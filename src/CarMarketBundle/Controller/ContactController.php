@@ -2,8 +2,9 @@
 
 namespace CarMarketBundle\Controller;
 
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use CarMarketBundle\Entity\Contact;
+use CarMarketBundle\Form\ContactType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -12,7 +13,7 @@ class ContactController extends Controller
 {
 	/**
      * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
-     * @Route("contact", name="create_contact", method={"GET"})
+     * @Route("contact", name="create_contact", methods={"GET"})
      */
     public function create()
     {
@@ -22,7 +23,9 @@ class ContactController extends Controller
 
     /**
      * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
-     * @Route("contact", method={"POST"})
+     * @Route("contact", methods={"POST"})
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function createProcess(Request $request)
     {
@@ -39,7 +42,23 @@ class ContactController extends Controller
             return $this->render('users/contact/create.html.twig', ['contact' => $contact, 'form' => $this->createForm(ContactType::class)->createView()]);
         }
 
-        var_dump('tuk');
-        exit;
+        $contact->setUser($this->getUser());
+
+        $em = $this->getDoctrine()->getManager();
+		$em->persist($contact);
+		$em->flush();
+
+		$this->addFlash("success", "Contact was created successfuly");
+        return $this->redirectToRoute('user_profile');
+    }
+
+    /**
+     * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
+     * @Route("contact/edit", name="edit_contact", methods={"GET"})
+     */
+    public function edit()
+    {
+        $contact = $this->getDoctrine()->getRepository(Contact::class)->findBy(['user' => $this->getUser()]);
+        return $this->render('users/contact/create.html.twig', ['contact' => $contact, 'form' => $this->createForm(ContactType::class)->createView()]);
     }
 }

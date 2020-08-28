@@ -21,15 +21,16 @@
         <div class="col-lg">
             <article>
                 <header>
-                    <h3>Welcome {{ contact.firstNmae|default(user.username) }} {{ contact.lastName|default(null) }}</h3>
+                    <h3 class="text-center">Welcome {{ contact.firstName|default(user.username) }} {{ contact.lastName|default(null) }}</h3>
                 </header>
                 <br>
+                <legend>Information</legend>
                 <p class="author">
                     Username: {{ user.username }}
                 </p>
 
                 <p class="author">
-                    First Name: {{ contact.firstNmae|default(null) }}
+                    First Name: {{ contact.firstName|default(null) }}
                 </p>
 
                 <p class="author">

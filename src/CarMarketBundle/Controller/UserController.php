@@ -93,7 +93,7 @@ class UserController extends Controller
      */
     public function profile()
     {
-        $contact = $this->getDoctrine()->getRepository(Contact::class)->findBy(['user' => $this->getUser()]);
+        $contact = $this->getDoctrine()->getRepository(Contact::class)->find($this->getUser()->getId());
         return $this->render('users/profile.html.twig', ['user' => $this->getUser(), 'contact' => $contact]);
     }
 
