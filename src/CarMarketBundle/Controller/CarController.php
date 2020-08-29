@@ -226,7 +226,8 @@ class CarController extends Controller
     {
         /** @var User $currentUser */
         $currentUser = $this->getUser();
-        if (!$currentUser->isAuthor($car) || !$currentUser->isAdmin()) {
+
+        if (!$currentUser->isAuthor($car) && !$currentUser->isAdmin()) {
             return false;
         }
 

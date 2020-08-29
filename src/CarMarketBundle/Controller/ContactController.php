@@ -41,12 +41,11 @@ class ContactController extends Controller
             }
             return $this->render('users/contact/create.html.twig', ['contact' => $contact, 'form' => $this->createForm(ContactType::class)->createView()]);
         }
-
+        
         $contact->setUser($this->getUser());
-
         $em = $this->getDoctrine()->getManager();
-		$em->persist($contact);
-		$em->flush();
+        $em->persist($contact);
+        $em->flush();
 
 		$this->addFlash("success", "Contact was created successfuly");
         return $this->redirectToRoute('user_profile');
@@ -58,7 +57,8 @@ class ContactController extends Controller
      */
     public function edit()
     {
-        $contact = $this->getDoctrine()->getRepository(Contact::class)->find($this->getUser()->getId());
+        $contact = $this->getDoctrine()->getRepository(Contact::class)->findBy(['user' => $this->getUser()]);
+        $contact = $contact[0];
         return $this->render('users/contact/edit.html.twig', ['contact' => $contact, 'form' => $this->createForm(ContactType::class)->createView()]);
     }
 
@@ -70,7 +70,10 @@ class ContactController extends Controller
      */
     public function editProcess(Request $request)
     {
-        $contact = $this->getDoctrine()->getRepository(Contact::class)->find($this->getUser()->getId());
+
+        // $contact = $this->getDoctrine()->getRepository(Contact::class)->find($this->getUser()->getId());*/
+        $contact = $this->getDoctrine()->getRepository(Contact::class)->findBy(['user' => $this->getUser()]);
+        $contact = $contact[0];
         $form = $this->createForm(ContactType::class, $contact);
         $form->handleRequest($request);
 

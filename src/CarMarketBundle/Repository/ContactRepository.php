@@ -2,10 +2,6 @@
 
 namespace CarMarketBundle\Repository;
 
-use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\Mapping;
-use SoftUniBlogBundle\Entity\Contact;
-
 /**
  * ContactRepository
  *
@@ -14,39 +10,4 @@ use SoftUniBlogBundle\Entity\Contact;
  */
 class ContactRepository extends \Doctrine\ORM\EntityRepository
 {
-	public function __construct(EntityManagerInterface $em, Mapping\ClassMetadata $metaData = null)
-	{
-		parent::__construct($em, $metaData ==  null ? new Mapping\ClassMetadata(Contact::class) : $metaData);
-	}
-
-	/**
-	 * @param Contact $contact 
-	 * @return bool
-	 */
-	public function insert(Contact $contact)
-	{
-		try {
-			$this->_em->persist($contact);
-			$this->_em->flush();
-			return true;
-		} catch (OptimisticLockException $e) {
-			return false;
-		}
-	}
-
-	/**
-	 * @param Contact $contact 
-	 * @return bool
-	 */
-	public function update(Contact $contact)
-	{
-		try {
-			$this->_em->merge($contact);
-			$this->_em->flush();
-			return true;
-		} catch (OptimisticLockException $e) {
-			return false;
-		}
-	}
-
 }

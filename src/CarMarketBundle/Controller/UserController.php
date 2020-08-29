@@ -7,6 +7,7 @@ use CarMarketBundle\Entity\Role;
 use CarMarketBundle\Entity\User;
 use CarMarketBundle\Form\ContactType;
 use CarMarketBundle\Form\UserType;
+use CarMarketBundle\Service\Contacts\ContactService;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,6 +16,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class UserController extends Controller
 {
+
     /**
      * @Route("register", name="user_register", methods={"GET"})
      * @param Request $request
@@ -152,7 +154,12 @@ class UserController extends Controller
      */
     public function profile()
     {
-        $contact = $this->getDoctrine()->getRepository(Contact::class)->find($this->getUser()->getId());
+        // $contact = $this->getDoctrine()->getRepository(Contact::class)->find($this->getUser());
+        $contact = $this->getDoctrine()->getRepository(Contact::class)->findBy(['user' => $this->getUser()]);
+        if ($contact != null) {
+            $contact = $contact[0];
+        }
+        
         return $this->render('users/profile.html.twig', ['user' => $this->getUser(), 'contact' => $contact]);
     }
 
